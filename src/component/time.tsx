@@ -21,7 +21,6 @@ class Time extends React.Component {
         return time;
     }
     componentDidMount() {
-        debugger
         let config = new ElecodiConfig();
         config.playerCmd = 'hhhhhh';
         setElecodiConfig(config);

@@ -4,7 +4,7 @@ import { Menu, Button } from 'antd';
 export default class Container extends React.Component {
     render() {
         return <div>
-            <Button>sdfsdfsdf</Button>
+            <Button href="#/time">sdfsdfsdf</Button>
             <Menu theme="dark" style={{ width: 256 }}>
                 <Menu.Item key="1">
                     <span>Movies</span>
