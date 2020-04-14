@@ -43,7 +43,10 @@ module.exports = (env) => {
             }]
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.wasm', '.mjs', '.js', '.json']
+            extensions: ['.tsx', '.ts', '.wasm', '.mjs', '.js', '.json'],
+            alias: {
+                '@': path.resolve(__dirname, './src')
+            }
         },
         plugins: [
             CSSExtract

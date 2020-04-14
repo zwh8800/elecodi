@@ -1,4 +1,9 @@
 import * as React from 'react';
+import {
+    getElecodiConfig,
+    setElecodiConfig
+} from '@/conf'
+
 class Time extends React.Component {
     state = {
         time: ''
@@ -11,7 +16,7 @@ class Time extends React.Component {
         let Hour = date.getHours();
         let Minute = date.getMinutes();
         let Seconds = date.getSeconds();
-        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds;
+        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds + getElecodiConfig();
         return time;
     }
     componentDidMount() {
