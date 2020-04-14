@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {
     getElecodiConfig,
-    setElecodiConfig
-} from '@/conf'
+    setElecodiConfig,
+    ElecodiConfig
+} from '@/conf/elecodiConf'
 
 class Time extends React.Component {
     state = {
@@ -20,6 +21,11 @@ class Time extends React.Component {
         return time;
     }
     componentDidMount() {
+        debugger
+        let config = new ElecodiConfig();
+        config.playerCmd = 'hhhhhh';
+        setElecodiConfig(config);
+
         setInterval(() => {
             this.setState(() => {
                 return {
