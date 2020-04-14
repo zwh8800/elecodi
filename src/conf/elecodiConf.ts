@@ -6,7 +6,7 @@ export class ElecodiConfig {
     playerCmd: string
 }
 
-export function getElecodiConfig() {
+export function getElecodiConfig(): ElecodiConfig {
     return plainToClass(ElecodiConfig, localStorage.getItem(elecodiConfigKey));
 }
 
