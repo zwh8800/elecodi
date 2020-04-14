@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Time from '@/component/time';
+import Route from './router';
 
-const domContainer = document.querySelector('#app');
-ReactDOM.render(React.createElement(Time), domContainer);
+ReactDOM.render(React.createElement(Route), document.querySelector('#app'));
