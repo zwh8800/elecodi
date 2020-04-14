@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node",
         "outDir": "./public/dist/",
         "noImplicitAny": true,
         "module": "es6",
@@ -11,7 +12,8 @@
             "@/*": [
                 "src/*"
             ]
-        }
+        },
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "./src/**/*"
