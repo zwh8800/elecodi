@@ -23,8 +23,8 @@ const Config = (props: Props) => {
         conf.setConfig(values);
         props.closeConfig();
     };
-    const onReset = () => {
-        form.resetFields();
+    const onClose = () => {
+        props.closeConfig();
     }
 
     const { visible } = props;
@@ -34,7 +34,6 @@ const Config = (props: Props) => {
             width={500}
             placement="right"
             closable={false}
-            maskClosable={false}
             visible={visible}
         >
             <Form
@@ -51,7 +50,7 @@ const Config = (props: Props) => {
                     <Input />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
-                    <Button htmlType="button" style={{marginRight: '10px'}} onClick={onReset}>重置</Button>
+                    <Button htmlType="button" style={{marginRight: '10px'}} onClick={onClose}>取消</Button>
                     <Button type="primary" htmlType="submit">提交</Button>
                 </Form.Item>
             </Form>

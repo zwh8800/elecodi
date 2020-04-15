@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "iconfont";
+    src:
+        url('~@/assets/style/icon/iconfont.woff') format('woff'),
+        url('~@/assets/style/icon/iconfont.ttf') format('truetype')
+  }
+
+  .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-play:before {
+        content: "\e7a0";
+  }
+
+  .icon-home:before {
+        content: "\e65b";
+  }
+
+  .icon-config:before {
+        content: "\e916";
+  }
+
+  .icon-left:before {
+        content: "\e609";
+  }
+
+  .icon-right:before {
+        content: "\e624";
+  }
+
+  .icon-tv_icon:before {
+        content: "\e6c7";
+  }
+
+  .icon-movie:before {
+        content: "\e6f8";
+  }

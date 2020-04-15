@@ -1,0 +1,23 @@
+@import "./icon";
+
+.container {
+    .home_title {
+        height: '32px';
+        background: 'rgba(255,255,255,.2)';
+        margin: '16px';
+        text-align: center;
+        .name {
+            font-size: 20px;
+            margin-left: 5px;
+        }
+    }
+    .header {
+        background: #fff;
+        padding: 0 20px 0 0;
+        text-align: right;
+        .icon-config {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+    }
+}
