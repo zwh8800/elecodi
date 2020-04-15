@@ -122,8 +122,34 @@ export interface Tvshow {
 }
 
 export interface Art {
-    fanart?: string;
     poster: string;
+    fanart?: string;
     banner?: string;
     thumb?: string;
+    "season.poster"?: string;   // in seasons
+    "season.banner"?: string;   // in seasons
+    "season.thumb"?: string;    // in seasons
+    "tvshow.banner"?: string;   // in seasons
+    "tvshow.fanart"?: string;   // in seasons
+    "tvshow.poster"?: string;   // in seasons
+    "tvshow.thumb"?: string;    // in seasons
+}
+
+export interface GetSeasonsLibraryResp {
+    limits: Limits;
+    seasons: Season[];
+}
+
+export interface Season {
+    art: Art;
+    episode: number;
+    fanart: string;
+    label: string;
+    playcount: number;
+    season: number;
+    seasonid: number;
+    showtitle: string;
+    thumbnail: string;
+    tvshowid: number;
+    watchedepisodes: number;
 }
