@@ -153,3 +153,41 @@ export interface Season {
     tvshowid: number;
     watchedepisodes: number;
 }
+
+export interface GetEpisodesLibraryResp {
+    episodes: Episode[];
+    limits: Limits;
+}
+
+export interface Episode {
+    art: Art;
+    cast: Cast[];
+    dateadded: string;
+    director: string[];
+    episode: number;
+    episodeid: number;
+    fanart: string;
+    file: string;
+    firstaired: string;
+    label: string;
+    lastplayed: string;
+    originaltitle: string;
+    playcount: number;
+    plot: string;
+    productioncode: string;
+    rating: number;
+    resume: Resume;
+    runtime: number;
+    season: number;
+    seasonid: number;
+    showtitle: string;
+    specialsortepisode: number;
+    specialsortseason: number;
+    streamdetails: Streamdetails;
+    thumbnail: string;
+    title: string;
+    tvshowid: number;
+    userrating: number;
+    votes: string;
+    writer: string[];
+}

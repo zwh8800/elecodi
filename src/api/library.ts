@@ -2,7 +2,8 @@ import { kodiServer } from './jsonrpc';
 import {
     GetMovieLibraryResp,
     GetTvShowLibraryResp,
-    GetSeasonsLibraryResp
+    GetSeasonsLibraryResp,
+    GetEpisodesLibraryResp
 } from './model';
 
 export enum SortOrder {
@@ -33,7 +34,7 @@ const movieProperties = ["title", "genre", "year", "rating", "director", "traile
 const tvShowProperties = ["title", "genre", "year", "rating", "plot", "studio",
     "mpaa", "cast", "playcount", "episode", "imdbnumber", "premiered", "votes",
     "lastplayed", "fanart", "thumbnail", "file", "originaltitle", "sorttitle",
-    "episodeguide", "season", "watchedepisodes", "dateadded", "tag", "art", "userrating"];
+    "episodeguide", "season", "watchedepisodes", "dateadded", "art", "userrating"];
 
 const searchProperties = ["title", "originaltitle", "plot"];
 
@@ -43,7 +44,7 @@ const seasonsProperties = ["season", "showtitle", "playcount", "episode", "fanar
 const episodesProperties = ["title", "plot", "votes", "rating", "writer", "firstaired",
     "playcount", "runtime", "director", "productioncode", "season", "episode", "originaltitle",
     "showtitle", "cast", "streamdetails", "lastplayed", "fanart", "thumbnail", "file", "resume", "tvshowid",
-    "dateadded", "uniqueid", "art", "specialsortseason", "specialsortepisode", "userrating", "seasonid"]
+    "dateadded", "art", "specialsortseason", "specialsortepisode", "userrating", "seasonid"]
 
 function pager(page?: number, pageSize?: number) {
     let start: number, end: number;
@@ -109,7 +110,7 @@ export function getSeasonsLibrary(tvShowId: number, sort?: Sort): PromiseLike<Ge
     })
 }
 
-export function getEpisodesLibrary(tvShowId: number, season: number, sort?: Sort) {
+export function getEpisodesLibrary(tvShowId: number, season: number, sort?: Sort): PromiseLike<GetEpisodesLibraryResp> {
     return kodiServer.request('VideoLibrary.GetEpisodes', {
         tvshowid: tvShowId,
         season: season,
