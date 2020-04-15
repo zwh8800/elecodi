@@ -1,14 +1,18 @@
 import * as React from 'react';
-import {
-    getConfig,
-    setConfig,
-    ElecodiConfig
-} from '@/conf/elecodiConf';
+import * as conf from '@/conf/elecodiConf';
+import * as api from '@/api'
 
-class Time extends React.Component {
-    state = {
-        time: ''
+class TimeState {
+    time: string;
+    movies: api.Movie[];
+}
+
+export default class Time extends React.Component {
+    state: TimeState = {
+        time: '',
+        movies: [],
     }
+
     getTime() {
         let date = new Date();
         let Year = date.getFullYear();
@@ -17,13 +21,16 @@ class Time extends React.Component {
         let Hour = date.getHours();
         let Minute = date.getMinutes();
         let Seconds = date.getSeconds();
-        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds + getConfig();
+        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds + conf.getConfig();
         return time;
     }
+
     componentDidMount() {
-        let config = new ElecodiConfig();
+        let config = new conf.Config();
         config.playerCmd = 'hhhhhh';
-        setConfig(config);
+        config.kodiHttpUrl = 'http://10.0.0.228:8081/jsonrpc';
+        config.kodiWsUrl = 'ws://10.0.0.228:9090/jsonrpc'
+        conf.setConfig(config);
 
         setInterval(() => {
             this.setState(() => {
@@ -33,13 +40,32 @@ class Time extends React.Component {
             });
         }, 1000);
     }
+
+    async onClick() {
+        let moives = await api.getAllMovieForSearch();
+        console.log('moives: ', moives);
+        this.setState(() => {
+            return {
+                movies: moives.movies
+            }
+        });
+    }
+
     render() {
         let timetext = this.state.time;
         return (
             <div>
                 <h1>{timetext}</h1>
-            </div>
+                <div>
+                    {this.state.movies.map((movie) => (
+                        <div>
+                            {movie.title}
+                        </div>
+                    ))}
+                </div>
+
+                <button onClick={this.onClick.bind(this)}>载入</button>
+            </div >
         );
     }
 }
-export default Time;

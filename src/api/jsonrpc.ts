@@ -4,11 +4,11 @@ import {
     JSONRPCServerAndClient,
     JSONRPCServer
 } from "json-rpc-2.0";
-import * as elecodiConf from '@/conf/elecodiConf';
+import * as conf from '@/conf/elecodiConf';
 
 export const kodiServer: JSONRPCClient = new JSONRPCClient(
     (jsonRPCRequest) =>
-        fetch(elecodiConf.getConfig().kodiHttpUrl, {
+        fetch(conf.getConfig().kodiHttpUrl, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -54,17 +54,18 @@ function wsOnClose(event: any) {
 }
 
 function setupWs() {
-    if (webSocket) {
-        webSocket.close();
+    let url = conf.getConfig().kodiWsUrl;
+    if (!url) {
+        return
     }
 
-    webSocket = new WebSocket(elecodiConf.getConfig().kodiWsUrl);
+    webSocket = new WebSocket(url);
     webSocket.onmessage = wsOnMessage;
     webSocket.onclose = wsOnClose
 }
 
 setupWs();
 
-elecodiConf.onConfigChange(() => {
-    setupWs();
+conf.onConfigChange(() => {
+    webSocket.close();
 });
