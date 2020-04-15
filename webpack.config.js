@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin')
+
 module.exports = (env) => {
     const isProduction = env === 'production';
     const CSSExtract = new ExtractTextPlugin('styles.css');
@@ -16,8 +18,21 @@ module.exports = (env) => {
         module: {
             rules: [{
                 test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    transpileOnly: true,
+                    getCustomTransformers: () => ({
+                        before: [tsImportPluginFactory({
+                            "libraryName": "antd",
+                            "libraryDirectory": 'es',
+                            "style": "css"
+                        })]
+                    }),
+                    compilerOptions: {
+                        module: 'es2015'
+                    }
+                }
             }, {
                 loader: 'babel-loader',
                 test: /\.js(x)?$/,
