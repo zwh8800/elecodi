@@ -4,6 +4,8 @@ const elecodiConfigKey = "elecodiConfig"
 
 export class ElecodiConfig {
     playerCmd: string
+    kodiHttpUrl: string
+    kodiWsUrl: string
 }
 
 export function getElecodiConfig(): ElecodiConfig {
