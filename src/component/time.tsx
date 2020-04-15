@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-    getElecodiConfig,
-    setElecodiConfig,
+    getConfig,
+    setConfig,
     ElecodiConfig
-} from '@/conf/elecodiConf'
+} from '@/conf/elecodiConf';
 
 class Time extends React.Component {
     state = {
@@ -17,13 +17,13 @@ class Time extends React.Component {
         let Hour = date.getHours();
         let Minute = date.getMinutes();
         let Seconds = date.getSeconds();
-        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds + getElecodiConfig();
+        let time = Year + '年' + Month + '月' + Day + '日' + Hour + ':' + Minute + ':' + Seconds + getConfig();
         return time;
     }
     componentDidMount() {
         let config = new ElecodiConfig();
         config.playerCmd = 'hhhhhh';
-        setElecodiConfig(config);
+        setConfig(config);
 
         setInterval(() => {
             this.setState(() => {
