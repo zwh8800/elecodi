@@ -58,7 +58,7 @@ export default class Time extends React.Component {
                 <h1>{timetext}</h1>
                 <div>
                     {this.state.movies.map((movie) => (
-                        <div>
+                        <div key={movie.movieid}>
                             {movie.title}
                         </div>
                     ))}
