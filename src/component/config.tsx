@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Drawer, Form, Input, Button } from 'antd';
 import * as conf from '@/conf/elecodiConf';
 
@@ -17,6 +18,11 @@ const tailLayout = {
 
 const Config = (props: Props) => {
     const [form] = Form.useForm();
+    const { visible } = props;
+
+    useEffect(() => {
+        form.setFieldsValue(conf.getConfig());
+    }, [visible]);
 
     const onFinish = (values: conf.Config) => {
         console.log('Success:', values);
@@ -27,7 +33,6 @@ const Config = (props: Props) => {
         props.closeConfig();
     }
 
-    const { visible } = props;
     return (
         <Drawer
             title="配置"
@@ -35,6 +40,7 @@ const Config = (props: Props) => {
             placement="right"
             closable={false}
             visible={visible}
+            getContainer={false}
         >
             <Form
                 {...layout}
@@ -50,7 +56,7 @@ const Config = (props: Props) => {
                     <Input />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
-                    <Button htmlType="button" style={{marginRight: '10px'}} onClick={onClose}>取消</Button>
+                    <Button htmlType="button" style={{ marginRight: '10px' }} onClick={onClose}>取消</Button>
                     <Button type="primary" htmlType="submit">提交</Button>
                 </Form.Item>
             </Form>

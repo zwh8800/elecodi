@@ -2,10 +2,17 @@ import { plainToClass, classToPlain } from 'class-transformer';
 
 const elecodiConfigKey = "elecodiConfig"
 
-export class Config {
+class config {
     playerCmd?: string
     kodiHttpUrl?: string
     kodiWsUrl?: string
+}
+
+export interface Config {
+    playerCmd?: string
+    kodiHttpUrl?: string
+    kodiWsUrl?: string
+    [name: string]: any;
 }
 
 type onConfigChangeCb = (newConfig: Config) => void;
@@ -13,7 +20,7 @@ type onConfigChangeCb = (newConfig: Config) => void;
 let cbList: onConfigChangeCb[] = [];
 
 export function getConfig(): Config {
-    let ret = plainToClass(Config, JSON.parse(localStorage.getItem(elecodiConfigKey)));
+    let ret = plainToClass(config, JSON.parse(localStorage.getItem(elecodiConfigKey)));
     if (!ret) {
         return {};
     }
