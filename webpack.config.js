@@ -28,10 +28,7 @@ module.exports = (env) => {
                             "libraryDirectory": 'es',
                             "style": "css"
                         })]
-                    }),
-                    compilerOptions: {
-                        module: 'es2015'
-                    }
+                    })
                 }
             }, {
                 loader: 'babel-loader',
