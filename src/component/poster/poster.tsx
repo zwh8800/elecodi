@@ -14,7 +14,7 @@ interface Props {
     onPlayClick?: (identifier: any) => void;
 }
 
-const Poster = (props: Props) => {
+function Poster(props: Props) {
     let [imgStyle, setImgStyle] = useState({
         height: 0,
         width: 0
