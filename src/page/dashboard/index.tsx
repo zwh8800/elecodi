@@ -8,13 +8,18 @@ import { Layout, Menu, Input, Row, Col } from 'antd';
 
 const { Header, Sider, Content, Footer } = Layout;
 
-class DashboardState {
+interface Props {
+
+}
+class State {
     visible: boolean
+    collapsed: boolean
 }
 
-export default class Dashboard extends React.Component {
-    state: DashboardState = {
-        visible: false
+export default class Dashboard extends React.Component<Props, State> {
+    state: State = {
+        visible: false,
+        collapsed: false
     }
     componentDidMount() {
         let config = conf.getConfig();
@@ -23,6 +28,11 @@ export default class Dashboard extends React.Component {
                 visible: true
             })
         }
+    }
+    toggleCollapsed = () => {
+        this.setState({
+            collapsed: !this.state.collapsed
+        })
     }
     onOpenConfig = () => {
         this.setState({
@@ -35,39 +45,37 @@ export default class Dashboard extends React.Component {
         })
     }
     render() {
-        const { visible } = this.state;
+        const { visible, collapsed } = this.state;
+        console.log(collapsed)
         return (
             <Layout>
                 <Header className="header-wrapper">
-                    <Row>
-                        <Col>
-                            <div className="logo-con">
-                                <i className="iconfont icon-home"></i>
-                                <span className="logo-name">EleCodi</span>
-                            </div>
-                        </Col>
-                        <Col>
-                            <Input.Search
-                                placeholder="input search text"
-                                style={{ width: 200 }}
-                            />
-                            <i className="iconfont icon-config" onClick={this.onOpenConfig}></i>
-                        </Col>
-                    </Row>
+                    <div>
+                        <span className="collapse" onClick={this.toggleCollapsed}><i className="iconfont icon-zhedie"></i></span>
+                        <span className="logo-name">ELECODI</span>
+                    </div>
+                    <div>
+                        <Input.Search placeholder="搜索" />
+                        <i className="iconfont icon-config" onClick={this.onOpenConfig}></i>
+                    </div>
                 </Header>
                 <Layout className="content-wrapper">
-                    <Sider width={256} className="sider-con">
-                        <Menu theme="dark" mode="inline" defaultSelectedKeys={['movies']}>
+                    <Sider width={200} className="sider-con" collapsed={collapsed} collapsedWidth={50}>
+                        <Menu
+                            theme="dark"
+                            mode="inline"
+                            defaultSelectedKeys={['movies']}
+                            inlineCollapsed={collapsed}>
                             <Menu.Item key="movies">
                                 <Link to="/movies">
                                     <i className="iconfont icon-movie"></i>
-                                    <span style={{ marginLeft: '10px' }}>movies</span>
+                                    <span style={{ marginLeft: '10px' }}>电影</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="tv">
                                 <Link to="/tv">
                                     <i className="iconfont icon-tv_icon"></i>
-                                    <span style={{ marginLeft: '10px' }}>tv</span>
+                                    <span style={{ marginLeft: '10px' }}>剧集</span>
                                 </Link>
                             </Menu.Item>
                         </Menu>

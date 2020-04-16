@@ -1,0 +1,33 @@
+$themeColor: #1f2326;
+
+#app {
+    .ant-layout {
+        height: 100vh;
+    }
+
+    .ant-menu {
+        background-color: $themeColor;
+
+        .ant-menu-item {
+            font-size: 15px;
+            margin-top: 0;
+        }
+
+        .ant-menu-item-selected {
+            background-color: hsla(0, 0%, 100%, .07);
+            box-shadow: inset 4px 0 0 0 #e5a00d;
+            font-size: 15px;
+            line-height: 40px;
+            color: hsla(0, 0%, 100%, .75);
+            transition: color .2s;
+
+            :hover {
+                color: #fff;
+            }
+        }
+    }
+
+    .ant-input-affix-wrapper-focused {
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+}

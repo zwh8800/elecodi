@@ -1,45 +1,75 @@
 @import "./icon";
+@import "./reset";
 
-.ant-layout {
-    height: 100vh;
-}
+$themeColor: #1f2326;
+$fontColor: rgba(255, 255, 255, 0.7);
+$inputColor: rgba(255, 255, 255, 0.9);
 
 .header-wrapper {
-    text-align: right;
-    background: #fff;
-    padding: 0 20px 0 0;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: $themeColor;
+    color: $fontColor;
+
+    .logo-name {
+        font-size: 25px;
+        margin-left: 22px;
+    }
+
+    .collapse {
+        height: 64px;
+        cursor: pointer;
+        display: inline-block;
+        border-right: 1px solid rgba(255, 255, 255, 0.5);
+
+        .icon-zhedie {
+            font-size: 25px;
+            margin-right: 22px;
+        }
+    }
 
     .icon-config {
         cursor: pointer;
-        margin-left: 15px;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .ant-input-search {
+        width: 250px;
+        border: none;
+        color: #eee;
+        background-color: rgba(255, 255, 255, 0.08);
+
+        input {
+            color: $inputColor;
+            background: transparent;
+            caret-color: $fontColor;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .ant-input-suffix {
+            svg {
+                fill: $fontColor;
+            }
+        }
     }
 }
 
 .content-wrapper {
     .sider-con {
         color: white;
-
-        .logo-con {
-            height: 32px;
-            margin: 16px;
-            text-align: center;
-
-            .iconfont {
-                font-size: 25px;
-            }
-
-            .logo-name {
-                font-size: 20px;
-                margin-left: 5px;
-            }
-        }
+        background-color: $themeColor;
     }
 
     .content-con {
-        padding: 24px;
         background: #fff;
         min-height: 360px;
-        margin: 24px 16px 0;
     }
 }
 
