@@ -14,7 +14,7 @@
         transition: box-shadow 0.2s;
 
         .mask {
-            z-index: 9999;
+            z-index: 10;
 
             width: 150px;
             height: 225px;
@@ -24,7 +24,7 @@
 
                 color: rgba(255, 255, 255, 0.7);
                 font-size: 60px;
-                z-index: 9999;
+                z-index: 10;
                 opacity: 0;
                 transition: color 0.2s, opacity 0.2s;
             }
@@ -65,10 +65,11 @@
         font-size: 14px;
         text-align: center;
         cursor: pointer;
-        color: #000;
+        color: rgba(255, 255, 255, 0.7);
     }
 
     .poster-title:hover {
         text-decoration: underline;
+        color: rgba(255, 255, 255, 0.9);
     }
 }
