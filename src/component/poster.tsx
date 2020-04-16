@@ -57,7 +57,7 @@ const Poster = (props: Props) => {
         <div className="poster">
             <div className="poster-img">
                 <div onClick={onMaskClick} className="mask">
-                    <i onClick={onPlayClick} className="play-button iconfont icon-play" style={{ fontSize: '25px' }}></i>
+                    <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
                 </div>
                 <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
             </div>

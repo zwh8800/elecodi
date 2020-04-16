@@ -46,8 +46,11 @@
             height: 225px;
 
             .play-button {
-                width: 30px;
-                height: 30px;
+                z-index: 9999;
+                color: rgba(255, 255, 255, 0.7);
+                width: 45px;
+                height: 45px;
+                font-size: 45px;
             }
         }
 
