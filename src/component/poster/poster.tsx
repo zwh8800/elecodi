@@ -4,8 +4,8 @@ import * as conf from '@/conf/elecodiConf';
 import './poster.scss';
 import classnames from 'classnames';
 
-const WIDTH = 150;
-const HEIGHT = 225;
+const IMG_WIDTH = 150;
+const IMG_HEIGHT = 225;
 
 interface Props {
     title: string;
@@ -17,8 +17,8 @@ interface Props {
 
 function Poster(props: Props) {
     let [imgStyle, setImgStyle] = useState({
-        height: WIDTH,
-        width: HEIGHT
+        height: IMG_WIDTH,
+        width: IMG_HEIGHT
     });
     let [maskWithBg, setMaskWithBg] = useState(false)
 
@@ -36,15 +36,15 @@ function Poster(props: Props) {
         setMaskWithBg(true);
         let imgHeight = e.currentTarget.naturalHeight;
         let imgWidth = e.currentTarget.naturalWidth;
-        if (imgWidth / imgHeight > WIDTH / HEIGHT) {
+        if (imgWidth / imgHeight > IMG_WIDTH / IMG_HEIGHT) {
             setImgStyle({
-                height: HEIGHT,
+                height: IMG_HEIGHT,
                 width: undefined,
             })
         } else {
             setImgStyle({
                 height: undefined,
-                width: WIDTH,
+                width: IMG_WIDTH,
             })
         }
     }
