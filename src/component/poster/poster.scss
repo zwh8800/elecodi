@@ -15,24 +15,27 @@
 
         .mask {
             z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
             width: 150px;
             height: 225px;
 
             .play-button {
+                @include center();
+
                 color: rgba(255, 255, 255, 0.7);
                 font-size: 60px;
                 z-index: 9999;
                 opacity: 0;
-                transition: color 0.2s;
+                transition: color 0.2s, opacity 0.2s;
             }
 
             .play-button:hover {
                 color: #cc7b19;
             }
+        }
+
+        .mask.with-bg {
+            background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
         }
 
         .img {
@@ -43,12 +46,8 @@
         &:hover {
             box-shadow: 0 0 0 2px #cc7b19;
 
-            .mask {
-                background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
-            }
-
             .img {
-                opacity: 0.6;
+                opacity: 0.5;
             }
 
             .play-button {
@@ -67,5 +66,9 @@
         text-align: center;
         cursor: pointer;
         color: #000;
+    }
+
+    .poster-title:hover {
+        text-decoration: underline;
     }
 }
