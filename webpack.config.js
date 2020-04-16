@@ -9,7 +9,6 @@ module.exports = (env) => {
     const CSSExtract = new ExtractTextPlugin('styles.css');
     const FriendlyErrors = new FriendlyErrorsPlugin();
     console.log('env=' + env);
-    console.log('env=' + env);
     return {
         mode: env,
         entry: './src/app.tsx',
