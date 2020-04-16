@@ -17,8 +17,8 @@ interface Props {
 
 function Poster(props: Props) {
     let [imgStyle, setImgStyle] = useState({
-        height: IMG_WIDTH,
-        width: IMG_HEIGHT
+        height: 0,
+        width: 0
     });
     let [maskWithBg, setMaskWithBg] = useState(false)
 
