@@ -7,7 +7,7 @@ import {
 } from '@/api';
 import { Button, message } from 'antd';
 
-import Poster from '@/component/post/poster';
+import Poster from '@/component/poster/poster';
 
 const PAGE_SIZE = 20;
 
