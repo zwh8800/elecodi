@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+import * as conf from '@/conf/elecodiConf';
 
 const WIDTH = 150;
 const HEIGHT = 200;
@@ -18,17 +19,17 @@ const Poster = (props: Props) => {
         width: 0
     });
 
-    const onMaskClick = () => {
+    function onMaskClick() {
         if (props.onClick)
             props.onClick(props.identifier);
     }
 
-    const onPlayClick = () => {
+    function onPlayClick() {
         if (props.onPlayClick)
             props.onPlayClick(props.identifier);
     }
 
-    const onImgLoad = (e: SyntheticEvent<HTMLImageElement>) => {
+    function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
         let imgHeight = e.currentTarget.height;
         let imgWidth = e.currentTarget.height;
         if (imgWidth / imgHeight > WIDTH / HEIGHT) {
@@ -44,13 +45,18 @@ const Poster = (props: Props) => {
         }
     }
 
+    function transKodiImage(url: string) {
+        url = encodeURIComponent(url);
+        return conf.getConfig().kodiHttpUrl + '/image/' + url;
+    }
+
     return (
         <div className="poster">
             <div className="poster-img">
                 <div onClick={onMaskClick} className="mask">
                     <i onClick={onPlayClick} className="play-button iconfont icon-play" style={{ fontSize: '25px' }}></i>
                 </div>
-                <img style={imgStyle} onLoad={onImgLoad} className="img" src={props.url}></img>
+                <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
             </div>
             <p className="poster-title">
                 {props.title}

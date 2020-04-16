@@ -8,7 +8,6 @@ import {
 import { Button, message } from 'antd';
 
 import Poster from '@/component/poster';
-import * as conf from '@/conf/elecodiConf';
 
 const PAGE_SIZE = 20;
 
@@ -65,11 +64,6 @@ export default class Movies extends React.Component<Props, State> {
         this.loadMovies();
     }
 
-    transKodiImage(url: string) {
-        url = encodeURIComponent(url);
-        return conf.getConfig().kodiHttpUrl + '/image/' + url;
-    }
-
     render() {
         return (
             <div>
@@ -80,7 +74,7 @@ export default class Movies extends React.Component<Props, State> {
                             key={movie.movieid}
                             identifier={movie.movieid}
                             title={movie.title}
-                            url={this.transKodiImage(movie.art.poster)}
+                            url={movie.art.poster}
                         />
                     ))}
                 </div>
