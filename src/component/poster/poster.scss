@@ -15,14 +15,13 @@
 
         .mask {
             z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
             width: 150px;
             height: 225px;
 
             .play-button {
+                @include center();
+
                 color: rgba(255, 255, 255, 0.7);
                 font-size: 60px;
                 z-index: 9999;
@@ -67,5 +66,9 @@
         text-align: center;
         cursor: pointer;
         color: #000;
+    }
+
+    .poster-title:hover {
+        text-decoration: underline;
     }
 }
