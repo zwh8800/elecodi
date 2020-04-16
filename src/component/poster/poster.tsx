@@ -20,7 +20,7 @@ function Poster(props: Props) {
         height: WIDTH,
         width: HEIGHT
     });
-    let [maskAddBg, setMaskAddBg] = useState(false)
+    let [maskWithBg, setMaskWithBg] = useState(false)
 
     function onMaskClick() {
         if (props.onClick)
@@ -33,7 +33,7 @@ function Poster(props: Props) {
     }
 
     function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
-        setMaskAddBg(true);
+        setMaskWithBg(true);
         let imgHeight = e.currentTarget.naturalHeight;
         let imgWidth = e.currentTarget.naturalWidth;
         if (imgWidth / imgHeight > WIDTH / HEIGHT) {
@@ -57,7 +57,7 @@ function Poster(props: Props) {
     return (
         <div className="poster">
             <div className="poster-img">
-                <div onClick={onMaskClick} className={classnames('mask', { 'add-bg': maskAddBg })}>
+                <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })}>
                     <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
                 </div>
                 <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
