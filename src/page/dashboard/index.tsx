@@ -46,7 +46,6 @@ export default class Dashboard extends React.Component<Props, State> {
     }
     render() {
         const { visible, collapsed } = this.state;
-        console.log(collapsed)
         return (
             <Layout>
                 <Header className="header-wrapper">

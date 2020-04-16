@@ -78,8 +78,10 @@ $inputColor: rgba(255, 255, 255, 0.9);
 }
 
 .movies-con {
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 ::-webkit-scrollbar {
