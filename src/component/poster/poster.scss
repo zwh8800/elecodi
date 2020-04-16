@@ -26,7 +26,7 @@
                 font-size: 60px;
                 z-index: 9999;
                 opacity: 0;
-                transition: color 0.2s;
+                transition: color 0.2s, opacity 0.2s;
             }
 
             .play-button:hover {
@@ -47,7 +47,7 @@
             box-shadow: 0 0 0 2px #cc7b19;
 
             .img {
-                opacity: 0.6;
+                opacity: 0.5;
             }
 
             .play-button {
