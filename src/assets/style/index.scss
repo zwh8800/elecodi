@@ -72,8 +72,9 @@ $inputColor: rgba(255, 255, 255, 0.9);
     }
 
     .content-con {
-        background: #fff;
         min-height: 360px;
+        background: no-repeat url('~@/assets/image/background.png');
+        background-size: cover;
     }
 }
 

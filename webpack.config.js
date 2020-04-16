@@ -67,6 +67,14 @@ module.exports = (env) => {
                         }
                     }
                 ]
+            }, {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {},
+                    },
+                ],
             }]
         },
         resolve: {
@@ -81,6 +89,7 @@ module.exports = (env) => {
         ],
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
+            port: 8080,
             quiet: true,   // 禁止显示devServer的console信息
             overlay: true, // 编译出现错误时，将错误直接显示在页面上
             contentBase: path.join(__dirname, 'public'),
