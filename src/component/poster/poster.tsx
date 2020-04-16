@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SyntheticEvent, useState } from 'react';
 import * as conf from '@/conf/elecodiConf';
 import './poster.scss';
+import classnames from 'classnames';
 
 const WIDTH = 150;
 const HEIGHT = 225;
@@ -16,9 +17,10 @@ interface Props {
 
 function Poster(props: Props) {
     let [imgStyle, setImgStyle] = useState({
-        height: 0,
-        width: 0
+        height: WIDTH,
+        width: HEIGHT
     });
+    let [maskAddBg, setMaskAddBg] = useState(false)
 
     function onMaskClick() {
         if (props.onClick)
@@ -31,6 +33,7 @@ function Poster(props: Props) {
     }
 
     function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
+        setMaskAddBg(true);
         let imgHeight = e.currentTarget.naturalHeight;
         let imgWidth = e.currentTarget.naturalWidth;
         if (imgWidth / imgHeight > WIDTH / HEIGHT) {
@@ -54,7 +57,7 @@ function Poster(props: Props) {
     return (
         <div className="poster">
             <div className="poster-img">
-                <div onClick={onMaskClick} className="mask">
+                <div onClick={onMaskClick} className={classnames('mask', { 'add-bg': maskAddBg })}>
                     <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
                 </div>
                 <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
@@ -62,7 +65,7 @@ function Poster(props: Props) {
             <p className="poster-title">
                 {props.title}
             </p>
-        </div>
+        </div >
     )
 }
 

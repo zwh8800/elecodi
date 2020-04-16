@@ -35,6 +35,10 @@
             }
         }
 
+        .mask.add-bg {
+            background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
+        }
+
         .img {
             @include center();
             transition: opacity 0.2s;
@@ -42,10 +46,6 @@
 
         &:hover {
             box-shadow: 0 0 0 2px #cc7b19;
-
-            .mask {
-                background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
-            }
 
             .img {
                 opacity: 0.6;
