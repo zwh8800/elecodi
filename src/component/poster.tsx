@@ -33,14 +33,11 @@ const Poster = (props: Props) => {
         let imgHeight = e.currentTarget.naturalHeight;
         let imgWidth = e.currentTarget.naturalWidth;
         if (imgWidth / imgHeight > WIDTH / HEIGHT) {
-            console.log('set height')
             setImgStyle({
                 height: HEIGHT,
                 width: undefined,
             })
         } else {
-            console.log('set width')
-
             setImgStyle({
                 height: undefined,
                 width: WIDTH,
