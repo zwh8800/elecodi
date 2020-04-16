@@ -14,8 +14,6 @@
 
         .mask {
             z-index: 9999;
-            background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,17 +40,21 @@
             @include center();
             transition: opacity 0.2s;
         }
-    }
 
-    .poster-img:hover {
-        box-shadow: 0 0 0 2px #cc7b19;
+        &:hover {
+            box-shadow: 0 0 0 2px #cc7b19;
 
-        .img {
-            opacity: 0.6;
-        }
+            .mask {
+                background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
+            }
 
-        .play-button {
-            opacity: 1;
+            .img {
+                opacity: 0.6;
+            }
+
+            .play-button {
+                opacity: 1;
+            }
         }
     }
 
