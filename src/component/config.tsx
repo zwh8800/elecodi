@@ -4,8 +4,8 @@ import { Drawer, Form, Input, Button } from 'antd';
 import * as conf from '@/conf/elecodiConf';
 
 interface Props {
-    visible: boolean,
-    closeConfig: () => void
+    visible: boolean;
+    onCloseConfig: () => void;
 }
 
 const layout = {
@@ -27,10 +27,10 @@ const Config = (props: Props) => {
     const onFinish = (values: conf.Config) => {
         console.log('Success:', values);
         conf.setConfig(values);
-        props.closeConfig();
+        props.onCloseConfig();
     };
     const onClose = () => {
-        props.closeConfig();
+        props.onCloseConfig();
     }
 
     return (

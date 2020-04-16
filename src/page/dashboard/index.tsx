@@ -18,7 +18,7 @@ export default class Dashboard extends React.Component {
     }
     componentDidMount() {
         let config = conf.getConfig();
-        if (Object.values(config).length === 0) {
+        if (Object.values(config).length == 0) {
             this.setState({
                 visible: true
             })
@@ -75,7 +75,7 @@ export default class Dashboard extends React.Component {
                         </div>
                     </Content>
                 </Layout>
-                <Config visible={visible} closeConfig={this.onCloseConfig} />
+                <Config visible={visible} onCloseConfig={this.onCloseConfig} />
             </Layout>
         )
     }

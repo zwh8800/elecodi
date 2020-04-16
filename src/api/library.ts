@@ -12,11 +12,16 @@ export enum SortOrder {
 }
 
 export enum SortMethod {
-    "none", "label", "date", "size", "file", "path", "drivetype", "title", "track", "time", "artist",
-    "album", "albumtype", "genre", "country", "year", "rating", "votes", "top250", "programcount",
-    "playlist", "episode", "season", "totalepisodes", "watchedepisodes", "tvshowstatus", "tvshowtitle",
-    "sorttitle", "productioncode", "mpaa", "studio", "dateadded", "lastplayed", "playcount", "listeners",
-    "bitrate", "random"
+    none = "none", label = "label", date = "date", size = "size", file = "file",
+    path = "path", drivetype = "drivetype", title = "title", track = "track",
+    time = "time", artist = "artist", album = "album", albumtype = "albumtype",
+    genre = "genre", country = "country", year = "year", rating = "rating", votes = "votes",
+    top250 = "top250", programcount = "programcount", playlist = "playlist", episode = "episode",
+    season = "season", totalepisodes = "totalepisodes", watchedepisodes = "watchedepisodes",
+    tvshowstatus = "tvshowstatus", tvshowtitle = "tvshowtitle", sorttitle = "sorttitle",
+    productioncode = "productioncode", mpaa = "mpaa", studio = "studio", dateadded = "dateadded",
+    lastplayed = "lastplayed", playcount = "playcount", listeners = "listeners", bitrate = "bitrate",
+    random = "random"
 }
 
 export interface Sort {

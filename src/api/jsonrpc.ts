@@ -14,12 +14,12 @@ export const kodiServer: JSONRPCClient = new JSONRPCClient(
                 "content-type": "application/json"
             },
             body: JSON.stringify(jsonRPCRequest)
-        }).then(response => {
-            if (response.status === 200) {
+        }).then(async response => {
+            if (response.status == 200) {
                 // Use client.receive when you received a JSON-RPC response.
-                return response.json().then(jsonRPCResponse => kodiServer.receive(jsonRPCResponse));
+                kodiServer.receive(await response.json());
             } else if (jsonRPCRequest.id !== undefined) {
-                return Promise.reject(new Error(response.statusText));
+                throw new Error(response.statusText);
             }
         })
 );
