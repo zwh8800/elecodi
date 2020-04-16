@@ -27,14 +27,14 @@ $inputColor: rgba(255, 255, 255, 0.9);
 
         .icon-zhedie {
             font-size: 25px;
-            margin-right: 22px;
+            margin: 0 28px 0 7px;
         }
     }
 
     .icon-config {
         cursor: pointer;
         font-size: 20px;
-        margin-left: 20px;
+        margin-left: 28px;
     }
 
     .ant-input-search {
@@ -65,6 +65,10 @@ $inputColor: rgba(255, 255, 255, 0.9);
     .sider-con {
         color: white;
         background-color: $themeColor;
+
+        .menu-item-name {
+            margin-left: 20px;
+        }
     }
 
     .content-con {

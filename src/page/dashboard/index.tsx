@@ -60,7 +60,7 @@ export default class Dashboard extends React.Component<Props, State> {
                     </div>
                 </Header>
                 <Layout className="content-wrapper">
-                    <Sider width={200} className="sider-con" collapsed={collapsed} collapsedWidth={50}>
+                    <Sider width={200} className="sider-con" collapsed={collapsed} collapsedWidth={80}>
                         <Menu
                             theme="dark"
                             mode="inline"
@@ -69,13 +69,13 @@ export default class Dashboard extends React.Component<Props, State> {
                             <Menu.Item key="movies">
                                 <Link to="/movies">
                                     <i className="iconfont icon-movie"></i>
-                                    <span style={{ marginLeft: '10px' }}>电影</span>
+                                    <span className="menu-item-name">电影</span>
                                 </Link>
                             </Menu.Item>
                             <Menu.Item key="tv">
                                 <Link to="/tv">
                                     <i className="iconfont icon-tv_icon"></i>
-                                    <span style={{ marginLeft: '10px' }}>剧集</span>
+                                    <span className="menu-item-name">剧集</span>
                                 </Link>
                             </Menu.Item>
                         </Menu>

@@ -11,6 +11,10 @@ $themeColor: #1f2326;
         .ant-menu-item {
             font-size: 15px;
             margin-top: 0;
+
+            span {
+                transition: opacity .3s cubic-bezier(.645, .045, .355, 1), width .3s cubic-bezier(.645, .045, .355, 1)
+            }
         }
 
         .ant-menu-item-selected {
@@ -29,5 +33,12 @@ $themeColor: #1f2326;
 
     .ant-input-affix-wrapper-focused {
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .ant-menu-inline-collapsed {
+        span {
+            opacity: 0;
+            max-width: 0;
+        }
     }
 }
