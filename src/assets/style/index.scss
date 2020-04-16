@@ -3,35 +3,47 @@
 .ant-layout {
     height: 100vh;
 }
+
 .header-wrapper {
     text-align: right;
     background: #fff;
     padding: 0 20px 0 0;
+
     .icon-config {
         cursor: pointer;
         margin-left: 15px;
     }
 }
+
 .content-wrapper {
     .sider-con {
         color: white;
-        .logo-con{
+
+        .logo-con {
             height: 32px;
             margin: 16px;
             text-align: center;
+
             .iconfont {
                 font-size: 25px;
             }
+
             .logo-name {
                 font-size: 20px;
                 margin-left: 5px;
             }
         }
     }
+
     .content-con {
         padding: 24px;
         background: #fff;
         min-height: 360px;
         margin: 24px 16px 0;
     }
+}
+
+.movies-con {
+    display: flex;
+    flex-wrap: wrap;
 }
