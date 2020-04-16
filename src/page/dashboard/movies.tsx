@@ -7,7 +7,7 @@ import {
 } from '@/api';
 import { Button, message } from 'antd';
 
-import Poster from '@/component/poster';
+import Poster from '@/component/post/poster';
 
 const PAGE_SIZE = 20;
 
@@ -66,9 +66,8 @@ export default class Movies extends React.Component<Props, State> {
 
     render() {
         return (
-            <div>
-                <h1>movies</h1>
-                <div>
+            <React.Fragment>
+                <div className="movies-con">
                     {this.state.movies.map((movie) => (
                         <Poster
                             key={movie.movieid}
@@ -81,7 +80,7 @@ export default class Movies extends React.Component<Props, State> {
                 <Button onClick={this.nextPage.bind(this)}>
                     下一页
                 </Button>
-            </div>
+            </React.Fragment>
         )
     }
 }

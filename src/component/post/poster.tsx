@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SyntheticEvent, useState } from 'react';
 import * as conf from '@/conf/elecodiConf';
+import './poster.scss';
 
 const WIDTH = 150;
 const HEIGHT = 225;
