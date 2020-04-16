@@ -37,7 +37,13 @@
         height: 225px;
         overflow: hidden;
 
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+
         .mask {
+            z-index: 9999;
+            background: radial-gradient(farthest-corner at 50% 50%, rgba(50, 50, 50, .5) 50%, #323232 100%);
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,16 +52,35 @@
             height: 225px;
 
             .play-button {
-                z-index: 9999;
                 color: rgba(255, 255, 255, 0.7);
-                width: 45px;
-                height: 45px;
-                font-size: 45px;
+                width: 60px;
+                height: 60px;
+                font-size: 60px;
+                z-index: 9999;
+                opacity: 0;
+                transition: color 0.2s;
+            }
+
+            .play-button:hover {
+                color: #cc7b19;
             }
         }
 
         .img {
             @include center();
+            transition: opacity 0.2s;
+        }
+    }
+
+    .poster-img:hover {
+        box-shadow: 0 0 0 2px #cc7b19;
+
+        .img {
+            opacity: 0.6;
+        }
+
+        .play-button {
+            opacity: 1;
         }
     }
 
@@ -65,7 +90,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        font-size: 16px;
+        font-size: 14px;
         text-align: center;
+        cursor: pointer;
+        color: #000;
     }
 }
