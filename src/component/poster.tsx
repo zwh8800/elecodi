@@ -3,7 +3,7 @@ import { SyntheticEvent, useState } from 'react';
 import * as conf from '@/conf/elecodiConf';
 
 const WIDTH = 150;
-const HEIGHT = 200;
+const HEIGHT = 225;
 
 interface Props {
     title: string;
@@ -30,14 +30,17 @@ const Poster = (props: Props) => {
     }
 
     function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
-        let imgHeight = e.currentTarget.height;
-        let imgWidth = e.currentTarget.height;
+        let imgHeight = e.currentTarget.naturalHeight;
+        let imgWidth = e.currentTarget.naturalWidth;
         if (imgWidth / imgHeight > WIDTH / HEIGHT) {
+            console.log('set height')
             setImgStyle({
                 height: HEIGHT,
                 width: undefined,
             })
         } else {
+            console.log('set width')
+
             setImgStyle({
                 height: undefined,
                 width: WIDTH,
