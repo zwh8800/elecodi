@@ -7,6 +7,9 @@ import {
 } from '@/api';
 import { Button, message } from 'antd';
 
+import Poster from '@/component/poster';
+import * as conf from '@/conf/elecodiConf';
+
 const PAGE_SIZE = 20;
 
 interface Props {
@@ -62,15 +65,23 @@ export default class Movies extends React.Component<Props, State> {
         this.loadMovies();
     }
 
+    transKodiImage(url: string) {
+        url = encodeURIComponent(url);
+        return conf.getConfig().kodiHttpUrl + '/image/' + url;
+    }
+
     render() {
         return (
             <div>
                 <h1>movies</h1>
                 <div>
                     {this.state.movies.map((movie) => (
-                        <p key={movie.movieid}>
-                            {movie.title}
-                        </p>
+                        <Poster
+                            key={movie.movieid}
+                            identifier={movie.movieid}
+                            title={movie.title}
+                            url={this.transKodiImage(movie.art.poster)}
+                        />
                     ))}
                 </div>
                 <Button onClick={this.nextPage.bind(this)}>

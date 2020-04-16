@@ -1,0 +1,68 @@
+@mixin center($width: null, $height: null) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    @if not $width and not $height {
+        transform: translate(-50%, -50%);
+    }
+
+    @else if $width and $height {
+        width: $width;
+        height: $height;
+        margin: -($width / 2) #{0 0} -($height / 2);
+    }
+
+    @else if not $height {
+        width: $width;
+        margin-left: -($width / 2);
+        transform: translateY(-50%);
+    }
+
+    @else {
+        height: $height;
+        margin-top: -($height / 2);
+        transform: translateX(-50%);
+    }
+}
+
+.poster {
+    width: 150px;
+    height: 220px;
+
+    .poster-img {
+        position: relative;
+
+        width: 150px;
+        height: 200px;
+        overflow: hidden;
+
+        .mask {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 150px;
+            height: 200px;
+
+            .play-button {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .img {
+            @include center();
+        }
+    }
+
+    .poster-title {
+        width: 150px;
+        height: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        text-align: center;
+    }
+}

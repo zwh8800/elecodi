@@ -8,7 +8,7 @@ import * as conf from '@/conf/elecodiConf';
 
 export const kodiServer: JSONRPCClient = new JSONRPCClient(
     (jsonRPCRequest) =>
-        fetch(conf.getConfig().kodiHttpUrl, {
+        fetch(conf.getConfig().kodiHttpUrl + '/jsonrpc', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -67,5 +67,6 @@ function setupWs() {
 setupWs();
 
 conf.onConfigChange(() => {
-    webSocket.close();
+    if (webSocket != null)
+        webSocket.close();
 });
