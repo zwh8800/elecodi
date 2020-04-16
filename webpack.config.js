@@ -1,11 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin')
 
 module.exports = (env) => {
     const isProduction = env === 'production';
     const CSSExtract = new ExtractTextPlugin('styles.css');
+    const FriendlyErrors = new FriendlyErrorsPlugin();
+    console.log('env=' + env);
     console.log('env=' + env);
     return {
         mode: env,
@@ -71,10 +74,13 @@ module.exports = (env) => {
             }
         },
         plugins: [
-            CSSExtract
+            CSSExtract,
+            FriendlyErrors
         ],
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
+            quiet: true,   // 禁止显示devServer的console信息
+            overlay: true, // 编译出现错误时，将错误直接显示在页面上
             contentBase: path.join(__dirname, 'public'),
             historyApiFallback: true,
             publicPath: '/dist/',
