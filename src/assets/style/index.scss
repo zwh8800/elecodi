@@ -1,5 +1,6 @@
 @import "./icon";
 @import "./reset";
+@import 'loaders.css/src/animations/ball-pulse-sync';
 
 $themeColor: #1f2326;
 $fontColor: rgba(255, 255, 255, 0.7);
@@ -80,6 +81,61 @@ body {
         background-color: $themeColor;
         background: no-repeat url('~@/assets/image/background.png');
         background-size: cover;
+
+        .loading {
+            height: 50px;
+
+            .movie-loader {
+                margin: 0 auto;
+                width: 42px;
+            }
+
+            .movie-loader>div {
+                background-color: rgba(255, 255, 255, 0.4);
+                width: 8px;
+                height: 8px;
+                margin: 3px;
+            }
+
+            .loader-hidden {
+                display: none;
+            }
+
+            .loader-active {
+                display: block;
+            }
+
+            .scroll-to-end {
+                position: relative;
+                color: rgba(255, 255, 255, 0.4);
+                margin: 30px;
+                text-align: center;
+                display: none;
+            }
+
+            .scroll-to-end.show {
+                display: block;
+            }
+
+            .scroll-to-end:before,
+            .scroll-to-end:after {
+                content: '';
+                position: absolute;
+                top: 52%;
+                background: rgba(255, 255, 255, 0.2);
+                width: 9%;
+                height: 1px;
+            }
+
+            .scroll-to-end:before {
+                left: 35%;
+            }
+
+            .scroll-to-end:after {
+                right: 35%;
+            }
+
+        }
     }
 }
 
@@ -89,6 +145,8 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-right: -10px;
+
+
 }
 
 .movies-con>i {

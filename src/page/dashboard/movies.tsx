@@ -6,6 +6,8 @@ import {
     getMovieLibrary
 } from '@/api';
 import { Button, message } from 'antd';
+import Loader from 'react-loaders';
+import classnames from 'classnames';
 
 import Poster from '@/component/poster/poster';
 import * as conf from '@/conf/elecodiConf';
@@ -15,6 +17,7 @@ const PAGE_SIZE = 20;
 interface Props { }
 
 class State {
+    loading: boolean = false;
     isScollEnd: boolean = false;
     movies: Movie[] = [];
 }
@@ -35,6 +38,9 @@ export default class Movies extends React.Component<Props, State> {
     }
 
     async loadMovies() {
+        this.setState({
+            loading: true
+        })
         try {
             let movies = await getMovieLibrary({
                 method: this.sortMethod,
@@ -52,8 +58,11 @@ export default class Movies extends React.Component<Props, State> {
 
         } catch (err) {
             console.error(err);
-            message.error('网络异常：' + err)
+            message.error('网络异常：' + err);
         }
+        this.setState({
+            loading: false
+        })
     }
 
     nextPage() {
@@ -91,6 +100,12 @@ export default class Movies extends React.Component<Props, State> {
                         />
                     ))}
                     {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                </div>
+                <div className="loading">
+                    <Loader type="ball-pulse-sync" active={this.state.loading} innerClassName="movie-loader" />
+                    <p className={classnames('scroll-to-end', { 'show': this.state.isScollEnd })}>
+                        已经到底了
+                    </p>
                 </div>
                 <Button onClick={this.nextPage.bind(this)}>
                     下一页
