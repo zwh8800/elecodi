@@ -34,21 +34,8 @@
     }
 
     .right {
-
         .search {
             width: 250px;
-            border: none;
-            background-color: $--color-tranparent;
-
-            input {
-                color: $--color-primary;
-                background: transparent;
-                caret-color: $--color-attractive;
-
-                &::placeholder {
-                    color: $--color-dim;
-                }
-            }
         }
 
         .icon-config {
