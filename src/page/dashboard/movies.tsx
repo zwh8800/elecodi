@@ -34,10 +34,6 @@ export default class Movies extends React.Component<Props, State> {
         conf.onConfigChange(this.onConfChange.bind(this));
     }
 
-    componentDidMount() {
-        this.loadMovies();
-    }
-
     async loadMovies() {
         this.setState({
             loading: true
@@ -93,7 +89,7 @@ export default class Movies extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <InfiniteScroll
-                    initialLoad={false}
+                    initialLoad={true}
                     pageStart={1}
                     loadMore={this.nextPage.bind(this)}
                     hasMore={!isScollEnd && !loading}
