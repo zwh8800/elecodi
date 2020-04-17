@@ -50,9 +50,13 @@ export default class Movies extends React.Component<Props, State> {
 
     onMovConScroll() {
         let scrollTop = this.ref.current.scrollTop;
-        this.setState({
-            scrollDown: scrollTop - this.lastScrollTop > 0
-        })
+        let scrollDown = scrollTop - this.lastScrollTop > 0;
+        if (this.state.scrollDown != scrollDown) {
+            this.setState({
+                scrollDown: scrollTop - this.lastScrollTop > 0
+            })
+        }
+
         this.lastScrollTop = scrollTop;
     }
 
