@@ -34,6 +34,10 @@ export default class Movies extends React.Component<Props, State> {
         conf.onConfigChange(this.onConfChange.bind(this));
     }
 
+    componentDidMount() {
+        document.title = '电影 - ELECODI';
+    }
+
     async loadMovies() {
         this.setState({
             loading: true
