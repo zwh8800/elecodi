@@ -94,16 +94,14 @@ function Poster(props: Props) {
     return (
         <div className="poster">
             {
-                plot ?
-                    <Tooltip placement="right" title={plot} mouseEnterDelay={2}>
-                        {jsxImg}
-                    </Tooltip> : jsxImg
+                <Tooltip placement="right" title={plot} mouseEnterDelay={2}>
+                    {jsxImg}
+                </Tooltip>
             }
             {
-                props.title.length > 10 ?
-                    <Tooltip placement="bottom" title={props.title}>
-                        {jsxTitle}
-                    </Tooltip> : jsxTitle
+                <Tooltip placement="bottom" title={props.title.length > 10 ? props.title : ''}>
+                    {jsxTitle}
+                </Tooltip>
             }
 
         </div >
