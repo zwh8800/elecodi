@@ -25,11 +25,16 @@ module.exports = (env) => {
                 options: {
                     transpileOnly: true,
                     getCustomTransformers: () => ({
-                        before: [tsImportPluginFactory({
+                        before: [tsImportPluginFactory([{
                             "libraryName": "antd",
                             "libraryDirectory": "es",
                             "style": "css"
-                        })]
+                        }, {
+                            style: false,
+                            libraryName: 'lodash',
+                            libraryDirectory: null,
+                            camel2DashComponentName: false
+                        }])]
                     })
                 }
             }, {
