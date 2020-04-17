@@ -24,7 +24,7 @@ class State {
 }
 
 export default class Movies extends React.Component<Props, State> {
-    curPage: number = 1;
+    curPage: number = 0;
     sortMethod: SortMethod = SortMethod.dateadded;
     sortOrder: SortOrder = SortOrder.Descending;
 
@@ -72,12 +72,12 @@ export default class Movies extends React.Component<Props, State> {
     }
 
     reset() {
-        this.curPage = 1;
+        this.curPage = 0;
         this.sortMethod = SortMethod.dateadded;
         this.sortOrder = SortOrder.Descending;
 
         this.setState(new State());
-        this.loadMovies();
+        this.nextPage();
     }
 
     onConfChange() {
