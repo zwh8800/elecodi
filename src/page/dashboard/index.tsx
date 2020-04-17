@@ -79,12 +79,14 @@ export default class Dashboard extends React.Component<Props, State> {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <Content className="content-con">
-                        <Switch>
-                            <Route path="/" component={Movies} />
-                            <Route path="/movies" component={Movies} />
-                            <Route path="/tv" component={TV} />
-                        </Switch>
+                    <Content>
+                        <div className="content-con">
+                            <Switch >
+                                <Route path="/" exact component={Movies} />
+                                <Route path="/movies" component={Movies} />
+                                <Route path="/tv" component={TV} />
+                            </Switch>
+                        </div>
                     </Content>
                 </Layout>
                 <Config visible={visible} onCloseConfig={this.onCloseConfig} />

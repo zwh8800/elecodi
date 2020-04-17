@@ -41,4 +41,7 @@ $themeColor: #1f2326;
             max-width: 0;
         }
     }
+    .ant-layout.ant-layout-has-sider > .ant-layout-content {
+        overflow-x: initial;
+    }
 }

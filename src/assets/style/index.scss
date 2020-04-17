@@ -77,7 +77,7 @@ body {
     }
 
     .content-con {
-        min-height: 360px;
+        min-height: calc(100vh - 60px);
         background-color: $themeColor;
         background: no-repeat url('~@/assets/image/background.png');
         background-size: cover;

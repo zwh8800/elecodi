@@ -5,9 +5,10 @@ import {
     Movie,
     getMovieLibrary
 } from '@/api';
-import { Button, message } from 'antd';
+import { message } from 'antd';
 import Loader from 'react-loaders';
 import classnames from 'classnames';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import Poster from '@/component/poster/poster';
 import * as conf from '@/conf/elecodiConf';
@@ -88,28 +89,34 @@ export default class Movies extends React.Component<Props, State> {
     }
 
     render() {
+        let { loading, isScollEnd, movies } = this.state;
         return (
             <React.Fragment>
-                <div className="movies-con">
-                    {this.state.movies.map((movie) => (
-                        <Poster
-                            key={movie.movieid}
-                            identifier={movie.movieid}
-                            title={movie.title}
-                            url={movie.art.poster}
-                        />
-                    ))}
-                    {[...Array(20).keys()].map((i) => <i key={i}></i>)}
-                </div>
+                <InfiniteScroll
+                    initialLoad={false}
+                    pageStart={1}
+                    loadMore={this.nextPage.bind(this)}
+                    hasMore={!isScollEnd && !loading}
+                    loader={null}
+                >
+                    <div className="movies-con">
+                        {movies.map((movie) => (
+                            <Poster
+                                key={movie.movieid}
+                                identifier={movie.movieid}
+                                title={movie.title}
+                                url={movie.art.poster}
+                            />
+                        ))}
+                        {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                    </div>
+                </InfiniteScroll>
                 <div className="loading">
-                    <Loader type="ball-pulse-sync" active={this.state.loading} innerClassName="movie-loader" />
-                    <p className={classnames('scroll-to-end', { 'show': this.state.isScollEnd })}>
+                    <Loader type="ball-pulse-sync" active={loading} innerClassName="movie-loader" />
+                    <p className={classnames('scroll-to-end', { 'show': isScollEnd })}>
                         已经到底了
                     </p>
                 </div>
-                <Button onClick={this.nextPage.bind(this)}>
-                    下一页
-                </Button>
             </React.Fragment>
         )
     }
