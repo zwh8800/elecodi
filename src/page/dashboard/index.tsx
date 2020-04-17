@@ -4,9 +4,9 @@ import Config from '@/component/config';
 import Movies from './movies';
 import TV from './tv';
 import { Link, Switch, Route } from 'react-router-dom';
-import { Layout, Menu, Input, Row, Col } from 'antd';
+import { Layout, Menu, Input } from 'antd';
 
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 
 interface Props {
 
@@ -81,6 +81,7 @@ export default class Dashboard extends React.Component<Props, State> {
                     </Sider>
                     <Content className="content-con">
                         <Switch>
+                            <Route path="/" component={Movies} />
                             <Route path="/movies" component={Movies} />
                             <Route path="/tv" component={TV} />
                         </Switch>
