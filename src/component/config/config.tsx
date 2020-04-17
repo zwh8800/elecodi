@@ -9,8 +9,8 @@ interface Props {
 }
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
 };
 const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
@@ -41,6 +41,7 @@ const Config = (props: Props) => {
             closable={false}
             visible={visible}
             getContainer={false}
+            className="config-drawer"
         >
             <Form
                 {...layout}
@@ -55,10 +56,10 @@ const Config = (props: Props) => {
                 <Form.Item name="kodiWsUrl" label="kodiWsUrl" rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item {...tailLayout}>
+                <div style={{ textAlign: 'right' }}>
                     <Button htmlType="button" style={{ marginRight: '10px' }} onClick={onClose}>取消</Button>
                     <Button type="primary" htmlType="submit">提交</Button>
-                </Form.Item>
+                </div>
             </Form>
         </Drawer>
     )

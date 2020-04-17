@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as conf from '@/conf/elecodiConf';
-import Config from '@/component/config';
+import Config from '@/component/config/config';
 import Movies from './movies';
 import TV from './tv';
 import { Link, Switch, Route } from 'react-router-dom';
