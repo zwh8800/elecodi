@@ -25,6 +25,7 @@ interface Props { }
 class State {
     loading: boolean = false;
     isScollEnd: boolean = false;
+    scrollDown: boolean = true;
     movies: Movie[] = [];
     sortMethod: SortMethod = SortMethod.dateadded;
     sortOrder: SortOrder = SortOrder.Descending;
@@ -32,15 +33,27 @@ class State {
 
 export default class Movies extends React.Component<Props, State> {
     curPage: number = 0;
+    ref: React.RefObject<HTMLDivElement>;
+    lastScrollTop: number = 0;
 
     constructor(props: Props) {
         super(props);
         this.state = new State();
         conf.onConfigChange(this.onConfChange.bind(this));
+        this.ref = React.createRef();
     }
 
     componentDidMount() {
         document.title = '电影 - ELECODI';
+        this.ref.current.addEventListener('scroll', this.onMovConScroll.bind(this));
+    }
+
+    onMovConScroll() {
+        let scrollTop = this.ref.current.scrollTop;
+        this.setState({
+            scrollDown: scrollTop - this.lastScrollTop > 0
+        })
+        this.lastScrollTop = scrollTop;
     }
 
     async loadMovies() {
@@ -137,8 +150,8 @@ export default class Movies extends React.Component<Props, State> {
         </Menu>);
 
         return (
-            <div className="movie-con">
-                <div className="top-bar">
+            <div ref={this.ref} className="movie-con">
+                <div style={{ 'position': this.state.scrollDown ? 'relative' : 'sticky' }} className="top-bar">
                     <div></div>
                     <div>
                         <Dropdown overlay={sorterMenu} trigger={['click']}>
