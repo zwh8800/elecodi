@@ -1,13 +1,8 @@
 .poster {
-    width: 150px;
-    height: 245px;
     margin: 5px;
 
     .poster-img {
         position: relative;
-
-        width: 150px;
-        height: 225px;
         overflow: hidden;
 
         cursor: pointer;
@@ -15,9 +10,6 @@
 
         .mask {
             z-index: 10;
-
-            width: 150px;
-            height: 225px;
 
             .play-button {
                 @include center();
@@ -57,8 +49,7 @@
     }
 
     .poster-title {
-        width: 150px;
-        height: 20px;
+        margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;

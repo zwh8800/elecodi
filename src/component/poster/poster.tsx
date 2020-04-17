@@ -5,19 +5,31 @@ import './poster.scss';
 import classnames from 'classnames';
 import { Tooltip } from 'antd';
 
-const IMG_WIDTH = 150;
-const IMG_HEIGHT = 225;
+const DEFAULT_IMG_WIDTH = 150;
+const DEFAULT_IMG_HEIGHT = 225;
+const DEFAULT_TITLE_HEIGHT = 20;
 
 interface Props {
     title: string;
     plot?: string;
     url: string;
     identifier: any;
+    width?: number;
+    height?: number
+
     onClick?: (identifier: any) => void;
     onPlayClick?: (identifier: any) => void;
 }
 
 function Poster(props: Props) {
+    let width = props.width, height = props.height;
+    if (!width) {
+        width = DEFAULT_IMG_WIDTH;
+    }
+    if (!height) {
+        height = DEFAULT_IMG_HEIGHT;
+    }
+
     let [imgStyle, setImgStyle] = useState({
         height: 0,
         width: 0
@@ -38,15 +50,15 @@ function Poster(props: Props) {
         setMaskWithBg(true);
         let imgHeight = e.currentTarget.naturalHeight;
         let imgWidth = e.currentTarget.naturalWidth;
-        if (imgWidth / imgHeight > IMG_WIDTH / IMG_HEIGHT) {
+        if (imgWidth / imgHeight > width / height) {
             setImgStyle({
-                height: IMG_HEIGHT,
                 width: undefined,
+                height: height,
             })
         } else {
             setImgStyle({
+                width: width,
                 height: undefined,
-                width: IMG_WIDTH,
             })
         }
     }
@@ -68,16 +80,16 @@ function Poster(props: Props) {
 
     let plot = transPlot(props.plot);
 
-    let jsxTitle = <p className="poster-title">
-        {props.title}
-    </p>;
-
     let jsxImg = <div className="poster-img">
-        <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })}>
+        <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })} style={{ width: width, height: height }}>
             <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
         </div>
         <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
     </div>;
+
+    let jsxTitle = <p className="poster-title" style={{ width: width, height: DEFAULT_TITLE_HEIGHT }}>
+        {props.title}
+    </p>;
 
     return (
         <div className="poster">
