@@ -95,16 +95,15 @@ export default class Movies extends React.Component<Props, State> {
         console.log(param);
 
         this.curPage = 0;
-        let state = new State();
         if (Object.values(SortMethod).includes(param.key as SortMethod)) {
-            state.sortMethod = param.key as SortMethod;
+            this.setState({
+                sortMethod: param.key as SortMethod
+            }, this.nextPage.bind(this));
         } else if (Object.values(SortOrder).includes(param.key as SortOrder)) {
-            state.sortOrder = param.key as SortOrder;
+            this.setState({
+                sortOrder: param.key as SortOrder
+            }, this.nextPage.bind(this));
         }
-
-        this.setState(state, () => {
-            this.nextPage();
-        });
     }
 
     render() {
@@ -148,6 +147,7 @@ export default class Movies extends React.Component<Props, State> {
                 </div>
                 <InfiniteScroll
                     initialLoad={true}
+                    pageStart={1}
                     loadMore={this.nextPage.bind(this)}
                     hasMore={!isScollEnd && !loading}
                     loader={null}
