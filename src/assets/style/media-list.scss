@@ -1,0 +1,82 @@
+.movie-con {
+    overflow-x: hidden;
+    height: calc(100vh - 60px);
+
+    .top-bar {
+        top: 0;
+        position: sticky;
+        z-index: 10;
+        height: 40px;
+        padding: 0 20px;
+        @include box-between;
+        background: $--color-tranparent;
+    }
+
+    .movie-list {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-right: -10px;
+    }
+
+    .movie-list>i {
+        margin: 8px 5px;
+        width: 150px;
+    }
+
+    .loading {
+        height: 50px;
+
+        .elecodi-loader {
+            width: 42px;
+            margin: 0 auto;
+        }
+
+        .elecodi-loader>div {
+            width: 8px;
+            height: 8px;
+            margin: 3px;
+            background-color: $--color-dimmer;
+        }
+
+        .loader-hidden {
+            display: none;
+        }
+
+        .loader-active {
+            display: block;
+        }
+
+        .scroll-to-end {
+            display: none;
+            text-align: center;
+            position: relative;
+            color: $--color-dimmer;
+            margin: 0 30px 50px 30px;
+        }
+
+        .scroll-to-end.show {
+            display: block;
+        }
+
+        .scroll-to-end:before,
+        .scroll-to-end:after {
+            content: '';
+            position: absolute;
+            top: 52%;
+            background: $--color-dimmer;
+            width: 9%;
+            height: 1px;
+        }
+
+        .scroll-to-end:before {
+            left: 35%;
+        }
+
+        .scroll-to-end:after {
+            right: 35%;
+        }
+
+    }
+}
