@@ -99,11 +99,11 @@ export function getTvShowLibrary(sort?: Sort, page?: number, pageSize?: number):
 
     return kodiServer.request('VideoLibrary.GetTvShows', {
         properties: tvShowProperties,
+        sort: sort,
         limits: {
             start: start,
             end: end
         },
-        sort: sort,
     })
 }
 
@@ -115,11 +115,17 @@ export function getSeasonsLibrary(tvShowId: number, sort?: Sort): PromiseLike<Ge
     })
 }
 
-export function getEpisodesLibrary(tvShowId: number, season: number, sort?: Sort): PromiseLike<GetEpisodesLibraryResp> {
+export function getEpisodesLibrary(tvShowId: number, season: number, sort?: Sort, page?: number, pageSize?: number): PromiseLike<GetEpisodesLibraryResp> {
+    let [start, end] = pager(page, pageSize);
+
     return kodiServer.request('VideoLibrary.GetEpisodes', {
         tvshowid: tvShowId,
         season: season,
         sort: sort,
         properties: episodesProperties,
+        limits: {
+            start: start,
+            end: end
+        },
     })
 }

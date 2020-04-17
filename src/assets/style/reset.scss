@@ -45,4 +45,39 @@ $themeColor: #1f2326;
     .ant-layout.ant-layout-has-sider>.ant-layout-content {
         overflow-x: initial;
     }
+
+    .ant-dropdown-trigger {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .ant-dropdown-trigger.ant-dropdown-open {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+}
+
+.ant-dropdown-menu {
+    background: $themeColor;
+    border-radius: 3px;
+
+    .ant-dropdown-menu-item-group-title {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .ant-dropdown-menu-item {
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.07);
+        }
+
+        &.ant-dropdown-menu-item-selected {
+            background-color: hsla(0, 0%, 100%, .07);
+            box-shadow: inset 4px 0 0 0 #e5a00d;
+            color: hsla(0, 0%, 100%, .75);
+            transition: color .2s;
+        }
+    }
+
+
 }

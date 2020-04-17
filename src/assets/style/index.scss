@@ -90,15 +90,39 @@ body {
         background: no-repeat url('~@/assets/image/background.png');
         background-size: cover;
 
+        .top-bar {
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+
+            .sorter-dropdown {}
+        }
+
+        .movies-con {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            margin-right: -10px;
+        }
+
+        .movies-con>i {
+            width: 150px;
+            margin: 5px;
+        }
+
         .loading {
             height: 50px;
 
-            .movie-loader {
+            .elecodi-loader {
                 margin: 0 auto;
                 width: 42px;
             }
 
-            .movie-loader>div {
+            .elecodi-loader>div {
                 background-color: rgba(255, 255, 255, 0.4);
                 width: 8px;
                 height: 8px;
@@ -144,20 +168,8 @@ body {
             }
 
         }
+
     }
-}
-
-.movies-con {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-right: -10px;
-}
-
-.movies-con>i {
-    width: 150px;
-    margin: 5px;
 }
 
 ::-webkit-scrollbar {
