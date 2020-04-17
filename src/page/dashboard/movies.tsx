@@ -8,12 +8,11 @@ import {
 import { Button, message } from 'antd';
 
 import Poster from '@/component/poster/poster';
+import * as conf from '@/conf/elecodiConf';
 
 const PAGE_SIZE = 20;
 
-interface Props {
-
-}
+interface Props { }
 
 class State {
     isScollEnd: boolean = false;
@@ -28,6 +27,7 @@ export default class Movies extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = new State();
+        conf.onConfigChange(this.onConfChange.bind(this));
     }
 
     componentDidMount() {
@@ -51,7 +51,8 @@ export default class Movies extends React.Component<Props, State> {
             })
 
         } catch (err) {
-            // POPUP ERROR
+            console.error(err);
+            message.error('网络异常：' + err)
         }
     }
 
@@ -62,6 +63,19 @@ export default class Movies extends React.Component<Props, State> {
         }
         this.curPage++;
         this.loadMovies();
+    }
+
+    reset() {
+        this.curPage = 1;
+        this.sortMethod = SortMethod.dateadded;
+        this.sortOrder = SortOrder.Descending;
+
+        this.setState(new State());
+        this.loadMovies();
+    }
+
+    onConfChange() {
+        this.reset();
     }
 
     render() {
