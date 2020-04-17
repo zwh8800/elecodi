@@ -148,7 +148,6 @@ export default class Movies extends React.Component<Props, State> {
                 </div>
                 <InfiniteScroll
                     initialLoad={true}
-                    pageStart={1}
                     loadMore={this.nextPage.bind(this)}
                     hasMore={!isScollEnd && !loading}
                     loader={null}
