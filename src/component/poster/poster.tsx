@@ -3,6 +3,7 @@ import { SyntheticEvent, useState } from 'react';
 import * as conf from '@/conf/elecodiConf';
 import './poster.scss';
 import classnames from 'classnames';
+import { Tooltip } from 'antd';
 
 const IMG_WIDTH = 150;
 const IMG_HEIGHT = 225;
@@ -20,7 +21,7 @@ function Poster(props: Props) {
         height: 0,
         width: 0
     });
-    let [maskWithBg, setMaskWithBg] = useState(false)
+    let [maskWithBg, setMaskWithBg] = useState(false);
 
     function onMaskClick() {
         if (props.onClick)
@@ -62,9 +63,18 @@ function Poster(props: Props) {
                 </div>
                 <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
             </div>
-            <p className="poster-title">
-                {props.title}
-            </p>
+            {
+                props.title.length > 10 ?
+                    <Tooltip placement="bottom" title={props.title}>
+                        <p className="poster-title">
+                            {props.title}
+                        </p>
+                    </Tooltip> :
+                    <p className="poster-title">
+                        {props.title}
+                    </p>
+            }
+
         </div >
     )
 }
