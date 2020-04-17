@@ -49,12 +49,12 @@ export default class Dashboard extends React.Component<Props, State> {
         return (
             <Layout>
                 <Header className="header-wrapper">
-                    <div>
+                    <div className="left">
                         <span className="collapse" onClick={this.toggleCollapsed}><i className="iconfont icon-zhedie"></i></span>
-                        <span className="logo-name">ELECODI</span>
+                        <span className="logo">ELECODI</span>
                     </div>
-                    <div>
-                        <Input.Search placeholder="搜索" />
+                    <div className="right">
+                        <Input.Search placeholder="搜索" className="search" />
                         <i className="iconfont icon-config" onClick={this.onOpenConfig}></i>
                     </div>
                 </Header>

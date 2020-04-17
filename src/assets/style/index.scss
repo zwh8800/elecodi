@@ -1,65 +1,60 @@
 @import "./icon";
 @import "./reset";
+@import "./scroll";
 @import 'loaders.css/src/animations/ball-pulse-sync';
 
-
 .header-wrapper {
-    color: #fff;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
     padding: 0 20px;
+    @include box-between;
+    color: $--color-primary;
     background-color: $--color-theme;
-    color: $--color-text;
 
-    .logo-name {
+    .left {
         font-size: 25px;
-        margin-left: 22px;
-    }
 
-    .collapse {
-        height: 64px;
-        cursor: pointer;
-        display: inline-block;
-        border-right: 1px solid rgba(255, 255, 255, 0.3);
+        .collapse {
+            cursor: pointer;
+            display: inline-block;
+            border-right: 1px solid $--color-primary;
 
-        .icon-zhedie {
-            font-size: 25px;
-            margin: 0 28px 0 7px;
+            .icon-zhedie {
+                font-size: 25px;
+                margin: 0 28px 0 7px;
+            }
+
+            &:hover .icon-zhedie {
+                color: $--color-active;
+            }
+
         }
 
-        &:hover .icon-zhedie {
-            color: $--color-active;
+        .logo {
+            margin-left: 22px;
         }
-
     }
 
-    .icon-config {
-        cursor: pointer;
-        font-size: 20px;
-        margin-left: 28px;
-    }
+    .right {
 
-    .ant-input-search {
-        width: 250px;
-        border: none;
-        color: #eee;
-        background-color: rgba(255, 255, 255, 0.08);
+        .search {
+            width: 250px;
+            border: none;
+            background-color: $--color-tranparent;
 
-        input {
-            color: $--color-input;
-            background: transparent;
-            caret-color: $--color-text;
+            input {
+                color: $--color-primary;
+                background: transparent;
+                caret-color: $--color-attractive;
 
-            &::placeholder {
-                color: rgba(255, 255, 255, 0.5);
+                &::placeholder {
+                    color: $--color-dim;
+                }
             }
         }
 
-        .ant-input-suffix {
-            svg {
-                fill: $--color-text;
-            }
+        .icon-config {
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 28px;
         }
     }
 }
@@ -83,13 +78,9 @@
 
         .top-bar {
             height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 0 20px;
-
-            .sorter-dropdown {}
+            @include box-between;
+            background: $--color-tranparent;
         }
 
         .movies-con {
@@ -101,23 +92,23 @@
         }
 
         .movies-con>i {
+            margin: 8px 5px;
             width: 150px;
-            margin: 5px;
         }
 
         .loading {
             height: 50px;
 
             .elecodi-loader {
-                margin: 0 auto;
                 width: 42px;
+                margin: 0 auto;
             }
 
             .elecodi-loader>div {
-                background-color: rgba(255, 255, 255, 0.4);
                 width: 8px;
                 height: 8px;
                 margin: 3px;
+                background-color: $--color-dimmer;
             }
 
             .loader-hidden {
@@ -129,11 +120,11 @@
             }
 
             .scroll-to-end {
-                position: relative;
-                color: rgba(255, 255, 255, 0.4);
-                margin: 0 30px 50px 30px;
-                text-align: center;
                 display: none;
+                text-align: center;
+                position: relative;
+                color: $--color-dimmer;
+                margin: 0 30px 50px 30px;
             }
 
             .scroll-to-end.show {
@@ -145,7 +136,7 @@
                 content: '';
                 position: absolute;
                 top: 52%;
-                background: rgba(255, 255, 255, 0.2);
+                background: $--color-dimmer;
                 width: 9%;
                 height: 1px;
             }

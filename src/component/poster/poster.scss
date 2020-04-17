@@ -1,5 +1,5 @@
 .poster {
-    margin: 5px;
+    margin: 8px 5px;
 
     .poster-img {
         position: relative;
@@ -14,7 +14,7 @@
             .play-button {
                 @include center();
 
-                color: rgba(255, 255, 255, 0.7);
+                color: $--color-primary;
                 font-size: 60px;
                 z-index: 10;
                 opacity: 0;
@@ -22,7 +22,7 @@
             }
 
             .play-button:hover {
-                color: #cc7b19;
+                color: $--color-active;
             }
         }
 
@@ -36,7 +36,7 @@
         }
 
         &:hover {
-            box-shadow: 0 0 0 2px #cc7b19;
+            box-shadow: 0 0 0 2px $--color-active;
 
             .img {
                 opacity: 0.5;
@@ -56,11 +56,11 @@
         font-size: 14px;
         text-align: center;
         cursor: pointer;
-        color: rgba(255, 255, 255, 0.7);
+        color: $--color-primary;
     }
 
     .poster-title:hover {
         text-decoration: underline;
-        color: rgba(255, 255, 255, 0.9);
+        color: $--color-attractive;
     }
 }

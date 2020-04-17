@@ -25,3 +25,24 @@
         transform: translateX(-50%);
     }
 }
+
+
+@mixin flex-box {
+    display: flex;
+
+    &>* {
+        flex: 0 0 auto;
+    }
+}
+
+@mixin box-center {
+    @include flex-box;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin box-between {
+    @include flex-box;
+    align-items: center;
+    justify-content: space-between;
+}
