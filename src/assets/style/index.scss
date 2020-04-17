@@ -2,15 +2,6 @@
 @import "./reset";
 @import 'loaders.css/src/animations/ball-pulse-sync';
 
-$themeColor: #1f2326;
-$fontColor: rgba(255, 255, 255, 0.7);
-$inputColor: rgba(255, 255, 255, 0.9);
-
-body {
-    background-color: $themeColor;
-    overflow: hidden;
-    user-select: none;
-}
 
 .header-wrapper {
     color: #fff;
@@ -18,8 +9,8 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
-    background-color: $themeColor;
-    color: $fontColor;
+    background-color: $--color-theme;
+    color: $--color-text;
 
     .logo-name {
         font-size: 25px;
@@ -38,7 +29,7 @@ body {
         }
 
         &:hover .icon-zhedie {
-            color: #e5a00d;
+            color: $--color-active;
         }
 
     }
@@ -56,9 +47,9 @@ body {
         background-color: rgba(255, 255, 255, 0.08);
 
         input {
-            color: $inputColor;
+            color: $--color-input;
             background: transparent;
-            caret-color: $fontColor;
+            caret-color: $--color-text;
 
             &::placeholder {
                 color: rgba(255, 255, 255, 0.5);
@@ -67,7 +58,7 @@ body {
 
         .ant-input-suffix {
             svg {
-                fill: $fontColor;
+                fill: $--color-text;
             }
         }
     }
@@ -76,7 +67,7 @@ body {
 .content-wrapper {
     .sider-con {
         color: white;
-        background-color: $themeColor;
+        background-color: $--color-theme;
 
         .menu-item-name {
             margin-left: 20px;
@@ -86,7 +77,7 @@ body {
     .content-con {
         overflow-x: hidden;
         height: calc(100vh - 60px);
-        background-color: $themeColor;
+        background-color: $--color-theme;
         background: no-repeat url('~@/assets/image/background.png');
         background-size: cover;
 
@@ -168,85 +159,5 @@ body {
             }
 
         }
-
     }
-}
-
-::-webkit-scrollbar {
-    height: 10px;
-    width: 10px
-}
-
-::-webkit-scrollbar-button {
-    height: 0;
-    width: 0
-}
-
-::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment {
-    display: block
-}
-
-::-webkit-scrollbar-button:vertical:start:increment,
-::-webkit-scrollbar-button:vertical:end:decrement {
-    display: none
-}
-
-::-webkit-scrollbar-track:vertical,
-::-webkit-scrollbar-track:horizontal,
-::-webkit-scrollbar-thumb:vertical,
-::-webkit-scrollbar-thumb:horizontal,
-::-webkit-scrollbar-track:vertical,
-::-webkit-scrollbar-track:horizontal,
-::-webkit-scrollbar-thumb:vertical,
-::-webkit-scrollbar-thumb:horizontal {
-    border-style: solid;
-    border-color: transparent
-}
-
-::-webkit-scrollbar-track:vertical::-webkit-scrollbar-track:horizontal {
-    background-clip: padding-box;
-    background-color: #fff;
-    border-radius: 1em;
-}
-
-::-webkit-scrollbar-thumb {
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-    background-clip: padding-box;
-    background-color: rgba(0, 0, 0, .2);
-    min-height: 28px;
-    padding-top: 100;
-    border-radius: 1em;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
-    background-color: rgba(0, 0, 0, .4)
-}
-
-::-webkit-scrollbar-thumb:active {
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
-    background-color: rgba(0, 0, 0, .5)
-}
-
-::-webkit-scrollbar-track:vertical,
-::-webkit-scrollbar-track:horizontal,
-::-webkit-scrollbar-thumb:vertical,
-::-webkit-scrollbar-thumb:horizontal {
-    border-width: 0;
-}
-
-::-webkit-scrollbar-track:hover {
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
-    background-color: rgba(0, 0, 0, .05)
-}
-
-::-webkit-scrollbar-track:active {
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07);
-    background-color: rgba(0, 0, 0, .05)
-}
-
-body::-webkit-scrollbar {
-    width: 0;
-    height: 0;
 }

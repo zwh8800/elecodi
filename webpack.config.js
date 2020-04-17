@@ -52,6 +52,7 @@ module.exports = (env) => {
                                 sourceMap: true,
                                 prependData: `
                                     @import "~@/assets/style/mixin";
+                                    @import "~@/assets/style/variable";
                                 `
                             }
                         }
