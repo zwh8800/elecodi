@@ -97,10 +97,12 @@ export default class Movies extends React.Component<Props, State> {
         this.curPage = 0;
         if (Object.values(SortMethod).includes(param.key as SortMethod)) {
             this.setState({
+                movies: [],
                 sortMethod: param.key as SortMethod
             }, this.nextPage.bind(this));
         } else if (Object.values(SortOrder).includes(param.key as SortOrder)) {
             this.setState({
+                movies: [],
                 sortOrder: param.key as SortOrder
             }, this.nextPage.bind(this));
         }
