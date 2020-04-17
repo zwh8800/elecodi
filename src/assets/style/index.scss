@@ -83,6 +83,12 @@ $inputColor: rgba(255, 255, 255, 0.9);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-right: -10px;
+}
+
+.movies-con>i {
+    width: 150px;
+    margin-right: 10px;
 }
 
 ::-webkit-scrollbar {
