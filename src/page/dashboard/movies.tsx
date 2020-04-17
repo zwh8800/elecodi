@@ -76,7 +76,7 @@ export default class Movies extends React.Component<Props, State> {
                             url={movie.art.poster}
                         />
                     ))}
-                    <i></i><i></i><i></i><i></i><i></i><i></i>
+                    {[...Array(20).keys()].map((i) => <i key={i}></i>)}
                 </div>
                 <Button onClick={this.nextPage.bind(this)}>
                     下一页
