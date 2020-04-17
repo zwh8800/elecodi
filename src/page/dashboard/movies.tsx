@@ -48,7 +48,9 @@ export default class Movies extends React.Component<Props, State> {
                     isScollEnd: true
                 })
             }
-            this.state.movies.push(...movies.movies);
+            for (let i = movies.limits.start; i < movies.limits.end; i++) {
+                this.state.movies[i] = movies.movies[i - movies.limits.start];
+            }
             this.setState({
                 movies: this.state.movies
             })
