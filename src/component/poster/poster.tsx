@@ -10,6 +10,7 @@ const IMG_HEIGHT = 225;
 
 interface Props {
     title: string;
+    plot?: string;
     url: string;
     identifier: any;
     onClick?: (identifier: any) => void;
@@ -55,24 +56,42 @@ function Poster(props: Props) {
         return conf.getConfig().kodiHttpUrl + '/image/' + url;
     }
 
+    function transPlot(plot?: string) {
+        if (!plot) {
+            return plot;
+        }
+        if (plot.length > 140) {
+            return plot.substr(0, 140) + '…';
+        }
+        return plot;
+    }
+
+    let plot = transPlot(props.plot);
+
+    let jsxTitle = <p className="poster-title">
+        {props.title}
+    </p>;
+
+    let jsxImg = <div className="poster-img">
+        <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })}>
+            <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
+        </div>
+        <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
+    </div>;
+
     return (
         <div className="poster">
-            <div className="poster-img">
-                <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })}>
-                    <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
-                </div>
-                <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
-            </div>
+            {
+                plot ?
+                    <Tooltip placement="right" title={plot} mouseEnterDelay={3}>
+                        {jsxImg}
+                    </Tooltip> : jsxImg
+            }
             {
                 props.title.length > 10 ?
                     <Tooltip placement="bottom" title={props.title}>
-                        <p className="poster-title">
-                            {props.title}
-                        </p>
-                    </Tooltip> :
-                    <p className="poster-title">
-                        {props.title}
-                    </p>
+                        {jsxTitle}
+                    </Tooltip> : jsxTitle
             }
 
         </div >

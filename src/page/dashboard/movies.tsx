@@ -104,6 +104,7 @@ export default class Movies extends React.Component<Props, State> {
                                 key={movie.movieid}
                                 identifier={movie.movieid}
                                 title={movie.title}
+                                plot={movie.plot}
                                 url={movie.art.poster}
                             />
                         ))}
