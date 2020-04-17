@@ -98,6 +98,7 @@ export default class Movies extends React.Component<Props, State> {
                     loadMore={this.nextPage.bind(this)}
                     hasMore={!isScollEnd && !loading}
                     loader={null}
+                    useWindow={false}
                 >
                     <div className="movies-con">
                         {movies.map((movie) => (
