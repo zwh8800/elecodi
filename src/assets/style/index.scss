@@ -8,6 +8,7 @@ $inputColor: rgba(255, 255, 255, 0.9);
 
 body {
     background-color: $themeColor;
+    overflow: hidden;
 }
 
 .header-wrapper {
