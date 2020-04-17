@@ -16,6 +16,8 @@ import {
     getMovieLibrary
 } from '@/api';
 
+import '@/assets/style/media-list';
+
 const PAGE_SIZE = 20;
 
 interface Props { }
@@ -135,11 +137,9 @@ export default class Movies extends React.Component<Props, State> {
         </Menu>);
 
         return (
-            <React.Fragment>
+            <div className="movie-con">
                 <div className="top-bar">
-                    <div>
-
-                    </div>
+                    <div></div>
                     <div>
                         <Dropdown overlay={sorterMenu} trigger={['click']}>
                             <a className="sorter-dropdown" onClick={e => e.preventDefault()}>
@@ -157,7 +157,7 @@ export default class Movies extends React.Component<Props, State> {
                     loader={null}
                     useWindow={false}
                 >
-                    <div className="movies-con">
+                    <div className="movie-list">
                         {movies.map((movie) => (
                             <Poster
                                 key={movie.movieid}
@@ -176,7 +176,7 @@ export default class Movies extends React.Component<Props, State> {
                         已经到底了
                     </p>
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }
