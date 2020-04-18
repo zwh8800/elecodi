@@ -14,7 +14,7 @@
     }
 
     .movie-list {
-        padding: 40px 20px 20px 20px;
+        padding: 20px 20px 20px 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -30,7 +30,7 @@
             height: 0;
             color: $--color-primary;
             border-bottom: 1px solid $--color-primary;
-            margin: 0 15px;
+            margin: 20px 15px 0 15px;
             line-height: 40px;
             top: 40px;
             position: sticky;
