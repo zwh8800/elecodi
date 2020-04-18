@@ -227,7 +227,6 @@ export default class Movies extends React.Component<Props, State> {
 
     render() {
         let { loading, isScollEnd, movies, sortMethod, sortOrder } = this.state;
-        console.log(movies)
 
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
             <Menu.Item disabled={true} className="switch-item">
