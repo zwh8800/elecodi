@@ -252,28 +252,29 @@ export default class Movies extends React.Component<Props, State> {
                     loader={null}
                     useWindow={false}
                 >
-                    <div className="movie-list">
-                        {movies.map((group) => (
-                            <React.Fragment key={group.group.name}>
-                                {[...Array(20).keys()].map((i) => <i key={i}></i>)}
-                                {group.group ?
-                                    <div className="group-title">
-                                        {group.group.name}
-                                    </div> : null}
+                    {movies.map((group) => (
+                        <div className="movie-list" key={group.group.name}>
 
-                                {group.media.map((movie) => (
-                                    <Poster
-                                        key={movie.movieid}
-                                        identifier={movie.movieid}
-                                        title={movie.title}
-                                        plot={movie.plot}
-                                        url={movie.art.poster}
-                                    />
-                                ))}
-                            </React.Fragment>
-                        ))}
-                        {[...Array(20).keys()].map((i) => <i key={i}></i>)}
-                    </div>
+                            {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                            {group.group ?
+                                <div className="group-title">
+                                    <span>{group.group.name}</span>
+                                </div> : null}
+
+                            {group.media.map((movie) => (
+                                <Poster
+                                    key={movie.movieid}
+                                    identifier={movie.movieid}
+                                    title={movie.title}
+                                    plot={movie.plot}
+                                    url={movie.art.poster}
+                                />
+                            ))}
+
+                            {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                        </div>
+
+                    ))}
                 </InfiniteScroll>
                 <div className="loading">
                     <Loader type="ball-pulse-sync" active={loading} innerClassName="elecodi-loader" />
