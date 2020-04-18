@@ -30,3 +30,10 @@ export function setConfig(config: Config) {
 export function onConfigChange(cb: onConfigChangeCb) {
     cbList.push(cb);
 }
+
+export function isValid(config?: Config): boolean {
+    if (!config) {
+        config = getConfig();
+    }
+    return !!config.kodiHttpUrl && !!config.kodiWsUrl;
+}

@@ -12,22 +12,21 @@ interface Props {
 
 }
 class State {
-    visible: boolean
-    collapsed: boolean
+    configInvalid: boolean = true;
+    configOpened: boolean = false;
+    collapsed: boolean = false;
 }
 
 export default class Dashboard extends React.Component<Props, State> {
-    state: State = {
-        visible: false,
-        collapsed: false
+    constructor(props: Props) {
+        super(props);
+        this.state = new State();
     }
+
     componentDidMount() {
-        let config = conf.getConfig();
-        if (Object.values(config).length == 0) {
-            this.setState({
-                visible: true
-            })
-        }
+        this.setState({
+            configInvalid: !conf.isValid()
+        })
     }
     toggleCollapsed = () => {
         this.setState({
@@ -36,16 +35,17 @@ export default class Dashboard extends React.Component<Props, State> {
     }
     onOpenConfig = () => {
         this.setState({
-            visible: true
+            configOpened: true
         })
     }
     onCloseConfig = () => {
         this.setState({
-            visible: false
+            configOpened: false,
+            configInvalid: !conf.isValid()
         })
     }
     render() {
-        const { visible, collapsed } = this.state;
+        const { configInvalid, configOpened, collapsed } = this.state;
         return (
             <Layout>
                 <Header className="header-wrapper">
@@ -81,15 +81,17 @@ export default class Dashboard extends React.Component<Props, State> {
                     </Sider>
                     <Content>
                         <div className="content-con">
-                            <Switch >
-                                <Route path="/" exact component={Movies} />
-                                <Route path="/movies" component={Movies} />
-                                <Route path="/tv" component={TV} />
-                            </Switch>
+                            {
+                                configInvalid ? null : <Switch >
+                                    <Route path="/" exact component={Movies} />
+                                    <Route path="/movies" component={Movies} />
+                                    <Route path="/tv" component={TV} />
+                                </Switch>
+                            }
                         </div>
                     </Content>
                 </Layout>
-                <Config visible={visible} onCloseConfig={this.onCloseConfig} />
+                <Config visible={configOpened || configInvalid} onCloseConfig={this.onCloseConfig} />
             </Layout>
         )
     }

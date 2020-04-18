@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Drawer, Form, Input, Button } from 'antd';
+import { Drawer, Form, Input, Button, message } from 'antd';
 
 import * as conf from '@/conf/elecodiConf';
 import FileSelect from '@/component/fileselect/fileselect';
@@ -26,11 +26,21 @@ function Config(props: Props) {
     }, [visible]);
 
     function onFinish(values: conf.Config) {
-        conf.setConfig(Object.assign({}, config, values));
+        let c = Object.assign({}, config, values)
+        if (!conf.isValid(c)) {
+            message.info('配置有误，请检查配置');
+            return;
+        }
+        conf.setConfig(c);
+
         props.onCloseConfig();
     }
 
     function onClose() {
+        if (!conf.isValid()) {
+            message.info('配置有误，请检查配置');
+            return;
+        }
         props.onCloseConfig();
     }
 
@@ -55,10 +65,10 @@ function Config(props: Props) {
                 <Form.Item name="playerCmd" label="playerCmd">
                     <FileSelect onChange={onFileSelect} />
                 </Form.Item>
-                <Form.Item name="kodiHttpUrl" label="kodiHttpUrl" rules={[{ required: true }]}>
+                <Form.Item name="kodiHttpUrl" label="kodiHttpUrl">
                     <Input />
                 </Form.Item>
-                <Form.Item name="kodiWsUrl" label="kodiWsUrl" rules={[{ required: true }]}>
+                <Form.Item name="kodiWsUrl" label="kodiWsUrl">
                     <Input />
                 </Form.Item>
                 <div style={{ textAlign: 'right' }}>
