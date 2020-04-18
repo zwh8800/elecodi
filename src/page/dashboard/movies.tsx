@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { message, Dropdown, Menu } from 'antd';
+import { message, Dropdown, Menu, Switch } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
 import Loader from 'react-loaders';
@@ -47,6 +47,7 @@ export default class Movies extends React.Component<Props, State> {
     curPage: number = 0;
     movieBuffer: Movie[] = [];
     lastBufferLength: number = 0;
+    shouldGrouping: boolean = true;
 
     constructor(props: Props) {
         super(props);
@@ -105,7 +106,11 @@ export default class Movies extends React.Component<Props, State> {
     grouping(by: SortMethod, groupMovie: GroupMovie[], movies: Movie[]): GroupMovie[] {
         let lastGroup: GroupMovie;
         if (groupMovie.length == 0) {
-            lastGroup = null;
+            lastGroup = {
+                group: null,
+                media: []
+            };
+            groupMovie.push(lastGroup)
         } else {
             lastGroup = groupMovie[groupMovie.length - 1]
         }
@@ -118,7 +123,10 @@ export default class Movies extends React.Component<Props, State> {
                 lastGroup.media.push(movie);
                 continue;
             }
-            if (lastGroup != null && group.name == lastGroup.group.name) {
+            if (lastGroup.group == null) {
+                lastGroup.group = group;
+            }
+            if (group.name == lastGroup.group.name) {
                 lastGroup.media.push(movie);
                 continue;
             }
@@ -151,7 +159,7 @@ export default class Movies extends React.Component<Props, State> {
             }
             if ((this.movieBuffer.length - this.lastBufferLength) == Object.keys(this.movieBuffer).length) {
                 this.lastBufferLength = this.movieBuffer.length;
-                let newMovies = this.grouping(this.state.sortMethod, Array.of(...this.state.movies), this.movieBuffer);
+                let newMovies = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.movies), this.movieBuffer);
                 this.movieBuffer = [];
                 this.setState({
                     movies: newMovies,
@@ -207,9 +215,27 @@ export default class Movies extends React.Component<Props, State> {
         }
     }
 
+    onGroupSwitchChange(checked: boolean) {
+        this.curPage = 0;
+        this.lastBufferLength = 0;
+        this.shouldGrouping = checked;
+        this.setState({
+            isScollEnd: false,
+            movies: [],
+        }, this.nextPage.bind(this))
+    }
+
     render() {
         let { loading, isScollEnd, movies, sortMethod, sortOrder } = this.state;
+        console.log(movies)
+
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
+            <Menu.Item disabled={true} className="switch-item">
+                <div>
+                    分组
+                </div>
+                <Switch defaultChecked onChange={this.onGroupSwitchChange.bind(this)} />
+            </Menu.Item>
             <Menu.ItemGroup key="method" title="方式">
                 <Menu.Item key={SortMethod.dateadded}>
                     按添加顺序
@@ -253,9 +279,7 @@ export default class Movies extends React.Component<Props, State> {
                     useWindow={false}
                 >
                     {movies.map((group) => (
-                        <div className="movie-list" key={group.group.name}>
-
-                            {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                        <div className="movie-list" key={group.group ? group.group.name : "default-group"}>
                             {group.group ?
                                 <div className="group-title">
                                     <span>{group.group.name}</span>

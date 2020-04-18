@@ -54,6 +54,7 @@ body {
         color: $--color-primary;
     }
 
+
 }
 
 
@@ -170,4 +171,8 @@ body {
     border: none;
     background: $--color-active-lighter;
     box-shadow: none;
+}
+
+.ant-switch-checked {
+    background-color: $--color-active;
 }

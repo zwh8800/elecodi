@@ -1,5 +1,6 @@
 .movie-con {
     overflow-x: hidden;
+    overflow-y: scroll;
     height: calc(100vh - 60px);
 
     .top-bar {
@@ -99,4 +100,9 @@
         }
 
     }
+}
+
+.switch-item {
+    @include box-between;
+    cursor: default !important;
 }
