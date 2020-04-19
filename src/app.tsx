@@ -37,7 +37,6 @@ function App() {
     useEffect(() => {
         let currentUrl = location.href;
         let selectedMenu = (menus.find(v => currentUrl.indexOf(v.link) > -1) || { key: '' }).key;
-        console.log(selectedMenu)
         setSelectMenu(selectedMenu);
     });
 

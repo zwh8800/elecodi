@@ -63,7 +63,15 @@
 
     .content-con {
         background-color: $--color-theme;
-        background: no-repeat url('~@/assets/image/background.png');
-        background-size: cover;
+
+        .movie-con {
+            @include container-bg('background');
+        }
+
+        .detail-con {
+            padding: 60px;
+            display: flex;
+            @include container-bg('detail-bg');
+        }
     }
 }

@@ -1,15 +1,15 @@
-export interface GetMovieLibraryResp {
+export class GetMovieLibraryResp {
     limits: Limits;
     movies: Movie[];
 }
 
-export interface Limits {
+export class Limits {
     end: number;
     start: number;
     total: number;
 }
 
-export interface Movie {
+export class Movie {
     art: Art;
     cast: Cast[];
     country: string[];
@@ -48,35 +48,35 @@ export interface Movie {
     year: number;
 }
 
-export interface Cast {
+export class Cast {
     name: string;
     order: number;
     role: string;
     thumbnail?: string;
 }
 
-export interface Resume {
+export class Resume {
     position: number;
     total: number;
 }
 
-export interface Streamdetails {
+export class Streamdetails {
     audio: Audio[];
     subtitle: Subtitle[];
     video: Video[];
 }
 
-export interface Audio {
+export class Audio {
     channels: number;
     codec: string;
     language: string;
 }
 
-export interface Subtitle {
+export class Subtitle {
     language: string;
 }
 
-export interface Video {
+export class Video {
     aspect: number;
     codec: string;
     duration: number;
@@ -85,12 +85,12 @@ export interface Video {
     width: number;
 }
 
-export interface GetTvShowLibraryResp {
+export class GetTvShowLibraryResp {
     limits: Limits;
     tvshows: Tvshow[];
 }
 
-export interface Tvshow {
+export class Tvshow {
     art: Art;
     cast: Cast[];
     dateadded: string;
@@ -121,7 +121,7 @@ export interface Tvshow {
     year: number;
 }
 
-export interface Art {
+export class Art {
     poster: string;
     fanart?: string;
     banner?: string;
@@ -135,12 +135,12 @@ export interface Art {
     "tvshow.thumb"?: string;    // in seasons
 }
 
-export interface GetSeasonsLibraryResp {
+export class GetSeasonsLibraryResp {
     limits: Limits;
     seasons: Season[];
 }
 
-export interface Season {
+export class Season {
     art: Art;
     episode: number;
     fanart: string;
@@ -154,12 +154,12 @@ export interface Season {
     watchedepisodes: number;
 }
 
-export interface GetEpisodesLibraryResp {
+export class GetEpisodesLibraryResp {
     episodes: Episode[];
     limits: Limits;
 }
 
-export interface Episode {
+export class Episode {
     art: Art;
     cast: Cast[];
     dateadded: string;
