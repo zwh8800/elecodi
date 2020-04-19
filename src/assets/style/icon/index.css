@@ -44,3 +44,7 @@
 .icon-zhedie:before {
     content: "\e60c";
 }
+
+.icon-grid:before {
+    content: "\e79c";
+}

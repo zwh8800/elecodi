@@ -8,10 +8,28 @@
         position: sticky;
         z-index: 20;
         height: 40px;
-        padding: 0 25px;
-        @include box-between;
         background: $--color-tranparent;
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .15);
+
+        .item {
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &>* {
+                margin: 0;
+            }
+
+            .sizer {
+                width: 80px;
+
+                i {
+                    font-size: 20px;
+                    color: $--color-primary;
+                }
+            }
+        }
     }
 
     .movie-list {

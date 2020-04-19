@@ -54,6 +54,23 @@ body {
         color: $--color-primary;
     }
 
+    .ant-slider-rail {
+        background: $--color-dim;
+    }
+
+    .ant-slider-track {
+        border-color: $--color-dim;
+        background-color: $--color-active;
+    }
+
+    .ant-slider-handle {
+        border-color: $--color-active;
+        background-color: $--color-primary-opaque;
+
+        &:focus {
+            box-shadow: 0 0 0 5px rgba($color: #e5a00d, $alpha: 0.12);
+        }
+    }
 
 }
 

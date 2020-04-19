@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { message, Dropdown, Menu, Switch } from 'antd';
+import { message, Dropdown, Menu, Switch, Slider, Row, Col } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
 import Loader from 'react-loaders';
@@ -23,6 +23,12 @@ import '@/assets/style/media-list';
 
 const PAGE_SIZE = 20;
 
+const SIZE_MAP = [
+    { width: 100, height: 150 },
+    { width: 150, height: 225 },
+    { width: 200, height: 300 },
+];
+
 class GroupInfo {
     name: string
 }
@@ -42,6 +48,7 @@ class State {
     movieGroups: GroupMovie[] = [];
     sortMethod: SortMethod = SortMethod.sorttitle;
     sortOrder: SortOrder = SortOrder.Ascending;
+    posterSize: number = 1; // 0,1,2 = 小中大
 }
 
 export default class Movies extends React.Component<Props, State> {
@@ -250,8 +257,14 @@ export default class Movies extends React.Component<Props, State> {
         this.props.history.push(`/movie/${movieid}`)
     }
 
+    onSizerChange(n: number) {
+        this.setState({
+            posterSize: n
+        })
+    }
+
     render() {
-        let { loading, isScollEnd, movieGroups, sortMethod, sortOrder } = this.state;
+        let { loading, isScollEnd, movieGroups, sortMethod, sortOrder, posterSize } = this.state;
 
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
             <Menu.Item disabled={true} className="switch-item">
@@ -284,15 +297,40 @@ export default class Movies extends React.Component<Props, State> {
         return (
             <div className="movie-con">
                 <div className="top-bar">
-                    <div></div>
-                    <div>
-                        <Dropdown overlay={sorterMenu} trigger={['click']}>
-                            <a className="sorter-dropdown" onClick={e => e.preventDefault()}>
-                                排序 <DownOutlined />
-                            </a>
-                        </Dropdown>
-                    </div>
+                    <Row gutter={24}>
+                        <Col span={20}>
+                        </Col>
+                        <Col span={2}>
+                            <div className="item">
+                                <div className="sizer">
+                                    <Row>
+                                        <Col span={20}>
+                                            <Slider
+                                                min={0}
+                                                max={2}
+                                                value={posterSize}
+                                                tipFormatter={v => ['小', '中', '大'][v]}
+                                                onChange={this.onSizerChange.bind(this)}
+                                            />
+                                        </Col>
+                                        <Col span={4}>
+                                            <i className="iconfont icon-grid"></i>
+                                        </Col>
+                                    </Row>
 
+                                </div>
+                            </div>
+                        </Col>
+                        <Col span={2}>
+                            <div className="item">
+                                <Dropdown overlay={sorterMenu} trigger={['click']}>
+                                    <a className="sorter-dropdown" onClick={e => e.preventDefault()}>
+                                        排序 <DownOutlined />
+                                    </a>
+                                </Dropdown>
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
                 <InfiniteScroll
                     initialLoad={true}
@@ -316,6 +354,7 @@ export default class Movies extends React.Component<Props, State> {
                                     title={movie.title}
                                     plot={movie.plot}
                                     url={movie.art.poster}
+                                    {...SIZE_MAP[posterSize]}
                                     onClick={this.onMediaClick.bind(this)}
                                     onPlayClick={this.onPlayClick.bind(this)}
                                 />

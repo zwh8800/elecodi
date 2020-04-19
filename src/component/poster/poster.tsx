@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useState, useEffect } from 'react';
 import * as conf from '@/conf/elecodiConf';
 import './poster.scss';
 import classnames from 'classnames';
@@ -29,12 +29,17 @@ function Poster(props: Props) {
     if (!height) {
         height = DEFAULT_IMG_HEIGHT;
     }
+    let imgHeight = 0, imgWidth = 0;
 
     let [imgStyle, setImgStyle] = useState({
         height: 0,
         width: 0
     });
     let [maskWithBg, setMaskWithBg] = useState(false);
+
+    useEffect(() => {
+        setImgStyleSize();
+    }, [width, height])
 
     function onMaskClick() {
         if (props.onClick)
@@ -48,8 +53,12 @@ function Poster(props: Props) {
 
     function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
         setMaskWithBg(true);
-        let imgHeight = e.currentTarget.naturalHeight;
-        let imgWidth = e.currentTarget.naturalWidth;
+        imgHeight = e.currentTarget.naturalHeight;
+        imgWidth = e.currentTarget.naturalWidth;
+        setImgStyleSize();
+    }
+
+    function setImgStyleSize() {
         if (imgWidth / imgHeight > width / height) {
             setImgStyle({
                 width: undefined,
