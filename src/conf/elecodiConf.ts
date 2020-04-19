@@ -8,6 +8,7 @@ export class Config {
     kodiWsUrl?: string
     fileReplaceFrom?: string
     fileReplaceTo?: string
+    windowsFs?: boolean
 }
 
 type onConfigChangeCb = (newConfig: Config) => void;
