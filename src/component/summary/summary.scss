@@ -1,0 +1,67 @@
+.summary {
+    margin-left: 60px;
+    padding-bottom: 20px;
+    color: $--color-attractive;
+
+    .header {
+        padding: 0 20px;
+
+        .item {
+            font-size: 15px;
+            @include box-between;
+        }
+
+        .item-first {
+
+            .name {
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+
+        .item-second {
+            line-height: 30px;
+
+            .year {
+                font-weight: bold;
+            }
+        }
+
+        .item-third {
+            margin-top: 4px;
+
+            .duration {
+                color: $--color-dim;
+            }
+        }
+    }
+
+    .divider {
+        margin: 24px 0;
+        height: 2px;
+        background-color: $--color-dim;
+    }
+
+    .content {
+        padding: 0 20px;
+
+        .section {
+            font-size: 15px;
+            margin-bottom: 24px;
+
+            .item>.label {
+                font-size: 13px;
+                display: inline-block;
+                color: $--color-dim;
+                width: 110px;
+                margin-right: 10px;
+            }
+
+            .item>.value {
+                font-weight: bold;
+            }
+
+            .introduction {}
+        }
+    }
+}

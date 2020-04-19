@@ -46,3 +46,9 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@mixin container-bg($bg: null) {
+    min-height: calc(100vh - 60px);
+    background: no-repeat url('~@/assets/image/'+ $bg + '.png');
+    background-size: cover;
+}
