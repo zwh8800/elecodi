@@ -20,7 +20,6 @@ function Cast(props: Props) {
 
     function transPicName(name: string) {
         let words = name.split(' ');
-        console.log(words, 'words')
         return words.map(v => v.charAt(0));
     }
 
