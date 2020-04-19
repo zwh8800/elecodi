@@ -1,0 +1,51 @@
+.cast-con {
+    h3 {
+        font-size: 15px;
+        color: $--color-primary;
+        margin-bottom: 10px;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .item {
+            margin-right: 20px;
+            height: 152px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: $--color-tranparent;
+                margin: auto;
+                margin-bottom: 10px;
+                overflow: hidden;
+                color: $--color-dimmer;
+                font-size: 25px;
+                line-height: 100px;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                }
+
+                &:hover {
+                    box-shadow: 0 0 0 2px $--color-active;
+                }
+            }
+
+            .name {
+                color: $--color-primary;
+            }
+
+            .role {
+                color: $--color-dimmer;
+            }
+        }
+    }
+}

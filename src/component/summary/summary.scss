@@ -1,4 +1,5 @@
 .summary {
+    user-select: text;
     margin-left: 60px;
     padding-bottom: 20px;
     color: $--color-attractive;
@@ -9,11 +10,8 @@
         .item {
             font-size: 15px;
             @include box-between;
-        }
 
-        .item-first {
-
-            .name {
+            .title {
                 font-size: 24px;
                 font-weight: bold;
             }
@@ -23,15 +21,26 @@
             line-height: 30px;
 
             .year {
-                font-weight: bold;
+                color: $--color-dim;
             }
         }
 
         .item-third {
             margin-top: 4px;
+            color: $--color-dim;
 
-            .duration {
-                color: $--color-dim;
+            .dot {
+                margin: 0 5px;
+                font-weight: bold;
+                display: inline-block;
+            }
+
+            .rate {
+                margin-left: 25px;
+                padding: 0 8px;
+                border-radius: 4px;
+                white-space: nowrap;
+                background-color: $--color-tranparent;
             }
         }
     }
@@ -60,8 +69,11 @@
             .item>.value {
                 font-weight: bold;
             }
+        }
 
-            .introduction {}
+        .section.introduction {
+            word-break: break-all;
+            word-wrap: break-word;
         }
     }
 }

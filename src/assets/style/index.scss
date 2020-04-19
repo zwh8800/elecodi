@@ -70,8 +70,11 @@
 
         .detail-con {
             padding: 60px;
-            display: flex;
             @include container-bg('detail-bg');
+
+            .row-first {
+                display: flex;
+            }
         }
     }
 }
