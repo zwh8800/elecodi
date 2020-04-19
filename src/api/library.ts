@@ -30,6 +30,8 @@ export interface Sort {
     order?: SortOrder
 }
 
+const movieListProperties = ["title", "plot", "lastplayed", "file", "sorttitle", "dateadded", "art"];
+
 const movieProperties = ["title", "genre", "year", "rating", "director", "trailer",
     "tagline", "plot", "plotoutline", "originaltitle", "lastplayed", "playcount", "writer",
     "studio", "mpaa", "cast", "country", "imdbnumber", "runtime", "set", "streamdetails",
@@ -85,12 +87,19 @@ export function getMovieLibrary(sort?: Sort, page?: number, pageSize?: number): 
     let [start, end] = pager(page, pageSize);
 
     return kodiServer.request('VideoLibrary.GetMovies', {
-        properties: movieProperties,
+        properties: movieListProperties,
         limits: {
             start: start,
             end: end
         },
         sort: sort,
+    })
+}
+
+export function getMovieDetail(movieid: number): PromiseLike<GetMovieLibraryResp> {
+    return kodiServer.request('VideoLibrary.GetMovieDetails', {
+        movieid: movieid,
+        properties: movieProperties,
     })
 }
 

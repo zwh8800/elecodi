@@ -64,14 +64,14 @@
     border-width: 0;
 }
 
-::-webkit-scrollbar-track:hover {
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
-    background-color: rgba(0, 0, 0, .05)
+::-webkit-scrollbar-track {
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .2)
 }
 
 ::-webkit-scrollbar-track:active {
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07);
-    background-color: rgba(0, 0, 0, .05)
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .4), inset -1px -1px 0 rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .3)
 }
 
 body::-webkit-scrollbar {
