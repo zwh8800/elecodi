@@ -17,6 +17,7 @@ import {
     Movie,
     getMovieLibrary
 } from '@/api';
+import * as player from '@/player/player';
 
 import '@/assets/style/media-list';
 
@@ -40,7 +41,7 @@ interface Props {
 class State {
     loading: boolean = false;
     isScollEnd: boolean = false;
-    movies: GroupMovie[] = [];
+    movieGroups: GroupMovie[] = [];
     sortMethod: SortMethod = SortMethod.sorttitle;
     sortOrder: SortOrder = SortOrder.Ascending;
 }
@@ -161,10 +162,10 @@ export default class Movies extends React.Component<Props, State> {
             }
             if ((this.movieBuffer.length - this.lastBufferLength) == Object.keys(this.movieBuffer).length) {
                 this.lastBufferLength = this.movieBuffer.length;
-                let newMovies = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.movies), this.movieBuffer);
+                let newMovies = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.movieGroups), this.movieBuffer);
                 this.movieBuffer = [];
                 this.setState({
-                    movies: newMovies,
+                    movieGroups: newMovies,
                 })
             }
 
@@ -205,13 +206,13 @@ export default class Movies extends React.Component<Props, State> {
         if (Object.values(SortMethod).includes(param.key as SortMethod)) {
             this.setState({
                 isScollEnd: false,
-                movies: [],
+                movieGroups: [],
                 sortMethod: param.key as SortMethod
             }, this.nextPage.bind(this));
         } else if (Object.values(SortOrder).includes(param.key as SortOrder)) {
             this.setState({
                 isScollEnd: false,
-                movies: [],
+                movieGroups: [],
                 sortOrder: param.key as SortOrder
             }, this.nextPage.bind(this));
         }
@@ -223,12 +224,32 @@ export default class Movies extends React.Component<Props, State> {
         this.shouldGrouping = checked;
         this.setState({
             isScollEnd: false,
-            movies: [],
+            movieGroups: [],
         }, this.nextPage.bind(this))
     }
 
+    findMovieById(movieid: number) {
+        for (let g of this.state.movieGroups) {
+            for (let m of g.media) {
+                if (m.movieid == movieid) {
+                    return m;
+                }
+            }
+        }
+        return null;
+    }
+
+    onPlayClick(movieid: number) {
+        let movie = this.findMovieById(movieid);
+        if (movie == null) {
+            message.warn('未找到电影id：' + movieid);
+            return
+        }
+        player.openPlayer(movie.file);
+    }
+
     render() {
-        let { loading, isScollEnd, movies, sortMethod, sortOrder } = this.state;
+        let { loading, isScollEnd, movieGroups, sortMethod, sortOrder } = this.state;
 
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
             <Menu.Item disabled={true} className="switch-item">
@@ -279,20 +300,22 @@ export default class Movies extends React.Component<Props, State> {
                     loader={null}
                     useWindow={false}
                 >
-                    {movies.map((group) => (
-                        <div className="movie-list" key={group.group ? group.group.name : "default-group"}>
-                            {group.group ?
+                    {movieGroups.map((groupItem) => (
+                        <div className="movie-list" key={groupItem.group ? groupItem.group.name : "default-group"}>
+                            {groupItem.group ?
                                 <div className="group-title">
-                                    <span>{group.group.name}</span>
+                                    <span>{groupItem.group.name}</span>
                                 </div> : null}
 
-                            {group.media.map((movie) => (
+                            {groupItem.media.map((movie) => (
                                 <Poster
                                     key={movie.movieid}
                                     identifier={movie.movieid}
                                     title={movie.title}
                                     plot={movie.plot}
                                     url={movie.art.poster}
+
+                                    onPlayClick={this.onPlayClick.bind(this)}
                                 />
                             ))}
 

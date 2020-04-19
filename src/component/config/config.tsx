@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { Drawer, Form, Input, Button, message } from 'antd';
+import { Drawer, Form, Input, Button, Switch, message } from 'antd';
 
 import * as conf from '@/conf/elecodiConf';
 import FileSelect from '@/component/fileselect/fileselect';
@@ -70,6 +70,15 @@ function Config(props: Props) {
                 </Form.Item>
                 <Form.Item name="kodiWsUrl" label="kodiWsUrl">
                     <Input />
+                </Form.Item>
+                <Form.Item name="fileReplaceFrom" label="fileReplaceFrom">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="fileReplaceTo" label="fileReplaceTo">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="windowsFs" label="windowsFs">
+                    <Switch />
                 </Form.Item>
                 <div style={{ textAlign: 'right' }}>
                     <Button htmlType="button" style={{ marginRight: '10px' }} onClick={onClose}>取消</Button>

@@ -126,10 +126,10 @@ body {
 }
 
 .ant-input-search,
-.ant-form-item-control-input-content {
+.ant-form-item-control-input-content>input {
     border-radius: 2px;
     border: none !important;
-    background-color: $--color-tranparent !important;
+    background-color: $--color-tranparent-lighter !important;
 }
 
 .ant-input-suffix {
@@ -156,7 +156,7 @@ body {
 .ant-btn:focus {
     border: none;
     color: $--color-primary;
-    background: $--color-tranparent;
+    background: $--color-tranparent-lighter;
     box-shadow: 0 0 0 1px $--color-dim;
 }
 
@@ -171,6 +171,10 @@ body {
     border: none;
     background: $--color-active-lighter;
     box-shadow: none;
+}
+
+.ant-switch {
+    background-color: $--color-tranparent-lighter;
 }
 
 .ant-switch-checked {
