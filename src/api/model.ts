@@ -1,3 +1,7 @@
+export class GetMovieDetailsResp {
+    moviedetails: Movie
+}
+
 export class GetMovieLibraryResp {
     limits: Limits;
     movies: Movie[];
