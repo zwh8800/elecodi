@@ -8,9 +8,13 @@ export function openPlayer(filepath: string) {
     if (config.windowsFs) {
         filepath = filepath.replace('/', '\\');
     }
-    try {
-        bridge.shellOpenItem(filepath);
-    } catch (e) {
-        console.warn(e);
+    if (bridge) {
+        try {
+            bridge.shellOpenItem(filepath);
+        } catch (e) {
+            console.warn(e);
+        }
+    } else {
+        location.href = filepath;
     }
 }
