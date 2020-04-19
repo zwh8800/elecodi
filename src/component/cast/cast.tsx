@@ -33,7 +33,7 @@ function Cast(props: Props) {
                     cast.map((item, i) => {
                         return (
                             <div key={i} className="item">
-                                <div className="avatar" style={{ backgroundImage: `url('${transKodiImage(item.thumbnail)}')` }} >
+                                <div className="avatar" style={{ backgroundImage: `url(${transKodiImage(item.thumbnail)})` }} >
                                     {
                                         item.thumbnail ? '' : transPicName(item.name)
                                     }
