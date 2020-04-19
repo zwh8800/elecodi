@@ -3,7 +3,6 @@ import { plainToClass, classToPlain } from 'class-transformer';
 const elecodiConfigKey = "elecodiConfig"
 
 export class Config {
-    playerCmd?: string
     kodiHttpUrl?: string
     kodiWsUrl?: string
     fileReplaceFrom?: string

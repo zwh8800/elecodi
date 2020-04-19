@@ -62,9 +62,6 @@ function Config(props: Props) {
                 {...layout}
                 form={form}
                 onFinish={onFinish}>
-                <Form.Item name="playerCmd" label="playerCmd">
-                    <FileSelect onChange={onFileSelect} />
-                </Form.Item>
                 <Form.Item name="kodiHttpUrl" label="kodiHttpUrl">
                     <Input />
                 </Form.Item>
