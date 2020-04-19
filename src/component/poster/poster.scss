@@ -32,6 +32,8 @@
 
         .img {
             @include center();
+            background-size: cover;
+            background-position: center;
             transition: opacity 0.2s, width 0.2s, height 0.2s;
         }
 
