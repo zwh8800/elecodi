@@ -360,7 +360,7 @@ export default class Movies extends React.Component<Props, State> {
                                 />
                             ))}
 
-                            {[...Array(20).keys()].map((i) => <i key={i}></i>)}
+                            {[...Array(20).keys()].map((i) => <i style={{ width: SIZE_MAP[posterSize].width }} key={i}></i>)}
                         </div>
 
                     ))}
