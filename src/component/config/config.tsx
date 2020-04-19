@@ -80,6 +80,9 @@ function Config(props: Props) {
                 <Form.Item name="windowsFs" label="windowsFs" valuePropName="checked">
                     <Switch />
                 </Form.Item>
+                <Form.Item name="encodeFilename" label="encodeFilename">
+                    <Switch />
+                </Form.Item>
                 <div style={{ textAlign: 'right' }}>
                     <Button htmlType="button" style={{ marginRight: '10px' }} onClick={onClose}>取消</Button>
                     <Button type="primary" htmlType="submit">提交</Button>

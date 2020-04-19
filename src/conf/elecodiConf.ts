@@ -9,6 +9,7 @@ export class Config {
     fileReplaceFrom?: string
     fileReplaceTo?: string
     windowsFs?: boolean
+    encodeFilename?: boolean
 }
 
 type onConfigChangeCb = (newConfig: Config) => void;
