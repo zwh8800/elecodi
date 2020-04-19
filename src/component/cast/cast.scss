@@ -11,15 +11,15 @@
         flex-wrap: wrap;
         justify-content: space-around;
 
+        i {
+            width: 152px;
+        }
+
         .item {
             width: 152px;
             text-align: center;
             margin-bottom: 10px;
             font-weight: bold;
-
-            i {
-                width: 152px;
-            }
 
             .avatar {
                 width: 100px;
