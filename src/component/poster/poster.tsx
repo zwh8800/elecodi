@@ -22,14 +22,9 @@ interface Props {
 }
 
 function Poster(props: Props) {
+    let imgRef: React.RefObject<HTMLImageElement> = React.createRef();
+
     let width = props.width, height = props.height;
-    if (!width) {
-        width = DEFAULT_IMG_WIDTH;
-    }
-    if (!height) {
-        height = DEFAULT_IMG_HEIGHT;
-    }
-    let imgHeight = 0, imgWidth = 0;
 
     let [imgStyle, setImgStyle] = useState({
         height: 0,
@@ -38,8 +33,17 @@ function Poster(props: Props) {
     let [maskWithBg, setMaskWithBg] = useState(false);
 
     useEffect(() => {
-        setImgStyleSize();
-    }, [width, height])
+        width = props.width;
+        height = props.height;
+        if (!width) {
+            width = DEFAULT_IMG_WIDTH;
+        }
+        if (!height) {
+            height = DEFAULT_IMG_HEIGHT;
+        }
+
+        setImgStyleSize(imgRef.current.naturalWidth, imgRef.current.naturalHeight);
+    }, [props.width, props.height])
 
     function onMaskClick() {
         if (props.onClick)
@@ -53,12 +57,11 @@ function Poster(props: Props) {
 
     function onImgLoad(e: SyntheticEvent<HTMLImageElement>) {
         setMaskWithBg(true);
-        imgHeight = e.currentTarget.naturalHeight;
-        imgWidth = e.currentTarget.naturalWidth;
-        setImgStyleSize();
+        setImgStyleSize(e.currentTarget.naturalWidth, e.currentTarget.naturalHeight);
     }
 
-    function setImgStyleSize() {
+    function setImgStyleSize(imgWidth: number, imgHeight: number) {
+        console.log(imgWidth, imgHeight)
         if (imgWidth / imgHeight > width / height) {
             setImgStyle({
                 width: undefined,
@@ -93,7 +96,7 @@ function Poster(props: Props) {
         <div className={classnames('mask', { 'with-bg': maskWithBg })} style={{ width: width, height: height }}>
             <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
         </div>
-        <img onClick={onMaskClick} style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
+        <img ref={imgRef} onClick={onMaskClick} style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
     </div>;
 
     let jsxTitle = <p onClick={onMaskClick} className="poster-title" style={{ width: width, height: DEFAULT_TITLE_HEIGHT }}>
