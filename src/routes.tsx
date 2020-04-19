@@ -35,7 +35,7 @@ const routes: RouteItem[] = [
             {
                 path: '/tv/detail',
                 component: TvDetail,
-                breadcrumbName: 'TV Detail'
+                breadcrumbName: '详情'
             }
         ]
     },
@@ -47,7 +47,7 @@ const routes: RouteItem[] = [
             {
                 path: '/movie/detail',
                 component: MovieDetail,
-                breadcrumbName: 'Movie Detail'
+                breadcrumbName: '详情'
             }
         ]
     }
