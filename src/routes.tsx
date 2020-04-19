@@ -6,18 +6,11 @@ import MovieDetail from '@/page/movie/detail';
 
 type ReactElement = any;
 
-export class RouteChild {
-    path: string;
-    component: ReactElement;
-    breadcrumbName: string;
-}
-
 export class RouteItem {
     path: string;
     component: ReactElement;
     exact?: boolean;
     breadcrumbName: string;
-    children?: RouteChild[];
 }
 
 const routes: RouteItem[] = [
@@ -30,27 +23,25 @@ const routes: RouteItem[] = [
     {
         path: '/tv',
         component: TV,
-        breadcrumbName: 'TV',
-        children: [
-            {
-                path: '/tv/detail',
-                component: TvDetail,
-                breadcrumbName: '详情'
-            }
-        ]
+        exact: true,
+        breadcrumbName: '剧集'
+    },
+    {
+        path: '/tv/:id',
+        component: TvDetail,
+        breadcrumbName: '剧集/详情'
     },
     {
         path: '/movie',
         component: Movie,
-        breadcrumbName: 'Movie',
-        children: [
-            {
-                path: '/movie/detail',
-                component: MovieDetail,
-                breadcrumbName: '详情'
-            }
-        ]
-    }
+        exact: true,
+        breadcrumbName: '电影'
+    },
+    {
+        path: '/movie/:id',
+        component: MovieDetail,
+        breadcrumbName: '电影/详情'
+    },
 ];
 
 export default routes;

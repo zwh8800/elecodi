@@ -77,7 +77,7 @@ function Config(props: Props) {
                 <Form.Item name="fileReplaceTo" label="fileReplaceTo">
                     <Input />
                 </Form.Item>
-                <Form.Item name="windowsFs" label="windowsFs">
+                <Form.Item name="windowsFs" label="windowsFs" valuePropName="checked">
                     <Switch />
                 </Form.Item>
                 <div style={{ textAlign: 'right' }}>

@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-export default class Detail extends React.Component {
+interface Props extends RouteComponentProps { }
+
+export default class Detail extends React.Component<Props> {
     render() {
-        return <div>TV Detail</div>
+        return <div>tv Detail</div>
     }
 }

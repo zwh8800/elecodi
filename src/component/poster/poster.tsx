@@ -81,13 +81,13 @@ function Poster(props: Props) {
     let plot = transPlot(props.plot);
 
     let jsxImg = <div className="poster-img">
-        <div onClick={onMaskClick} className={classnames('mask', { 'with-bg': maskWithBg })} style={{ width: width, height: height }}>
+        <div className={classnames('mask', { 'with-bg': maskWithBg })} style={{ width: width, height: height }}>
             <i onClick={onPlayClick} className="play-button iconfont icon-play"></i>
         </div>
-        <img style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
+        <img onClick={onMaskClick} style={imgStyle} onLoad={onImgLoad} className="img" src={transKodiImage(props.url)}></img>
     </div>;
 
-    let jsxTitle = <p className="poster-title" style={{ width: width, height: DEFAULT_TITLE_HEIGHT }}>
+    let jsxTitle = <p onClick={onMaskClick} className="poster-title" style={{ width: width, height: DEFAULT_TITLE_HEIGHT }}>
         {props.title}
     </p>;
 

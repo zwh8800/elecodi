@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteItem } from '@/routes';
+import { RouteComponentProps } from 'react-router-dom';
 import { message, Dropdown, Menu, Switch } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
@@ -34,9 +34,7 @@ class GroupMedia<M> {
 
 type GroupMovie = GroupMedia<Movie>
 
-interface Props {
-    routes: RouteItem[]
-}
+interface Props extends RouteComponentProps { }
 
 class State {
     loading: boolean = false;
@@ -248,6 +246,10 @@ export default class Movies extends React.Component<Props, State> {
         player.openPlayer(movie.file);
     }
 
+    onMediaClick(movieid: number) {
+        this.props.history.push(`/movie/${movieid}`)
+    }
+
     render() {
         let { loading, isScollEnd, movieGroups, sortMethod, sortOrder } = this.state;
 
@@ -314,7 +316,7 @@ export default class Movies extends React.Component<Props, State> {
                                     title={movie.title}
                                     plot={movie.plot}
                                     url={movie.art.poster}
-
+                                    onClick={this.onMediaClick.bind(this)}
                                     onPlayClick={this.onPlayClick.bind(this)}
                                 />
                             ))}

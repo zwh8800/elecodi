@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { RouteItem } from '@/routes';
+import { RouteComponentProps } from 'react-router-dom';
 
-interface Props {
-    routes: RouteItem[]
-}
-
+interface Props extends RouteComponentProps { }
 
 class State {
 
 }
+
 export default class Tv extends React.Component<State, Props> {
     render() {
         return <div>Tv</div>
