@@ -71,6 +71,12 @@ function Config(props: Props) {
                 <Form.Item name="kodiWsUrl" label="kodiWsUrl">
                     <Input />
                 </Form.Item>
+                <Form.Item name="fileReplaceFrom" label="fileReplaceFrom">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="fileReplaceTo" label="fileReplaceTo">
+                    <Input />
+                </Form.Item>
                 <div style={{ textAlign: 'right' }}>
                     <Button htmlType="button" style={{ marginRight: '10px' }} onClick={onClose}>取消</Button>
                     <Button type="primary" htmlType="submit">提交</Button>

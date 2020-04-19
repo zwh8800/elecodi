@@ -6,6 +6,8 @@ export class Config {
     playerCmd?: string
     kodiHttpUrl?: string
     kodiWsUrl?: string
+    fileReplaceFrom?: string
+    fileReplaceTo?: string
 }
 
 type onConfigChangeCb = (newConfig: Config) => void;
