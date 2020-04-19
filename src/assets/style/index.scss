@@ -70,7 +70,10 @@
 
         .detail-con {
             padding: 60px;
-            @include container-bg('detail-bg');
+            height: calc(100vh - 60px);
+            background: no-repeat url('~@/assets/image/detail-bg.png');
+            background-size: cover;
+            overflow-y: auto;
 
             .row-first {
                 display: flex;
