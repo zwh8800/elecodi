@@ -80,7 +80,7 @@ function Config(props: Props) {
                 <Form.Item name="windowsFs" label="windowsFs" valuePropName="checked">
                     <Switch />
                 </Form.Item>
-                <Form.Item name="encodeFilename" label="encodeFilename">
+                <Form.Item name="encodeFilename" label="encodeFilename" valuePropName="checked">
                     <Switch />
                 </Form.Item>
                 <div style={{ textAlign: 'right' }}>
