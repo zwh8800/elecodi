@@ -69,11 +69,34 @@
         }
 
         .detail-con {
-            padding: 60px;
-            height: calc(100vh - 60px);
+            overflow: hidden;
             background: no-repeat url('~@/assets/image/detail-bg.png');
             background-size: cover;
-            overflow-y: auto;
+            background-position: center;
+            position: relative;
+
+            .detail-scroll-con {
+                padding: 60px;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: -20px;
+                right: -20px;
+                bottom: -20px;
+                left: -20px;
+                background: inherit;
+                background-attachment: fixed;
+                filter: brightness(.7) blur(15px);
+            }
+
+            &>* {
+                z-index: 5;
+                position: relative;
+            }
 
             .row-first {
                 display: flex;
