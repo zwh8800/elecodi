@@ -61,7 +61,6 @@ function Poster(props: Props) {
     }
 
     function setImgStyleSize(imgWidth: number, imgHeight: number) {
-        console.log(imgWidth, imgHeight)
         if (imgWidth / imgHeight > width / height) {
             setImgStyle({
                 width: undefined,
