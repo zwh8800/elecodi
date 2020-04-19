@@ -1,5 +1,5 @@
 import Home from '@/page/home';
-import TV from '@/page/tv';
+import TV from '@/page/tv/tv';
 import Movie from '@/page/movie/movie';
 import TvDetail from '@/page/tv/detail';
 import MovieDetail from '@/page/movie/detail';

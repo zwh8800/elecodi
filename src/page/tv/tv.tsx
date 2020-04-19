@@ -14,8 +14,8 @@ import * as conf from '@/conf/elecodiConf';
 import {
     SortMethod,
     SortOrder,
-    Movie,
-    getMovieLibrary
+    Tvshow,
+    getTvShowLibrary
 } from '@/api';
 import * as player from '@/player/player';
 
@@ -38,22 +38,22 @@ class GroupMedia<M> {
     media: M[];
 }
 
-type GroupMovie = GroupMedia<Movie>
+type GroupTv = GroupMedia<Tvshow>
 
 interface Props extends RouteComponentProps { }
 
 class State {
     loading: boolean = false;
     isScollEnd: boolean = false;
-    movieGroups: GroupMovie[] = [];
-    sortMethod: SortMethod = SortMethod.sorttitle;
-    sortOrder: SortOrder = SortOrder.Asc;
+    tvGroups: GroupTv[] = [];
+    sortMethod: SortMethod = SortMethod.dateadded;
+    sortOrder: SortOrder = SortOrder.Desc;
     posterSize: number = 1; // 0,1,2 = 小中大
 }
 
-export default class Movies extends React.Component<Props, State> {
+export default class TV extends React.Component<Props, State> {
     curPage: number = 0;
-    movieBuffer: Movie[] = [];
+    tvBuffer: Tvshow[] = [];
     lastBufferLength: number = 0;
     shouldGrouping: boolean = true;
 
@@ -64,13 +64,13 @@ export default class Movies extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        document.title = '电影 - ELECODI';
+        document.title = '剧集 - ELECODI';
     }
 
-    getGroup(by: SortMethod, movie: Movie): GroupInfo {
+    getGroup(by: SortMethod, tv: Tvshow): GroupInfo {
         switch (by) {
             case SortMethod.dateadded: {
-                let date = new Date(movie.dateadded);
+                let date = new Date(tv.dateadded);
                 return {
                     name: moment(date).format('YYYY-MM')
                 }
@@ -80,7 +80,7 @@ export default class Movies extends React.Component<Props, State> {
                 if (!pinyin.isSupported()) {
                     return null;
                 }
-                let tokens = pinyin.parse(movie.title.substr(0, 1));
+                let tokens = pinyin.parse(tv.title.substr(0, 1));
                 if (tokens.length <= 0 || tokens[0].target.length <= 0) {
                     return null;
                 }
@@ -95,7 +95,7 @@ export default class Movies extends React.Component<Props, State> {
             }
 
             case SortMethod.lastplayed: {
-                let date = new Date(movie.lastplayed);
+                let date = new Date(tv.lastplayed);
                 if (isNaN(date.getTime())) {
                     return {
                         name: '未播放'
@@ -111,66 +111,66 @@ export default class Movies extends React.Component<Props, State> {
         }
     }
 
-    grouping(by: SortMethod, groupMovie: GroupMovie[], movies: Movie[]): GroupMovie[] {
-        let lastGroup: GroupMovie;
-        if (groupMovie.length == 0) {
+    grouping(by: SortMethod, groupTv: GroupTv[], tvs: Tvshow[]): GroupTv[] {
+        let lastGroup: GroupTv;
+        if (groupTv.length == 0) {
             lastGroup = {
                 group: null,
                 media: []
             };
-            groupMovie.push(lastGroup)
+            groupTv.push(lastGroup)
         } else {
-            lastGroup = groupMovie[groupMovie.length - 1]
+            lastGroup = groupTv[groupTv.length - 1]
         }
-        for (let movie of movies) {
-            if (!movie) {
+        for (let tv of tvs) {
+            if (!tv) {
                 continue
             }
-            let group = this.getGroup(by, movie);
+            let group = this.getGroup(by, tv);
             if (group == null) {
-                lastGroup.media.push(movie);
+                lastGroup.media.push(tv);
                 continue;
             }
             if (lastGroup.group == null) {
                 lastGroup.group = group;
             }
             if (group.name == lastGroup.group.name) {
-                lastGroup.media.push(movie);
+                lastGroup.media.push(tv);
                 continue;
             }
             lastGroup = {
                 group: group,
-                media: [movie]
+                media: [tv]
             }
-            groupMovie.push(lastGroup)
+            groupTv.push(lastGroup)
         }
 
-        return groupMovie;
+        return groupTv;
     }
 
-    async loadMovies() {
+    async loadTV() {
         this.setState({
             loading: true
         })
         try {
-            let movieResp = await getMovieLibrary({
+            let tvResp = await getTvShowLibrary({
                 method: this.state.sortMethod,
                 order: this.state.sortOrder
             }, this.curPage, PAGE_SIZE);
-            if (movieResp.limits.end >= movieResp.limits.total) {
+            if (tvResp.limits.end >= tvResp.limits.total) {
                 this.setState({
                     isScollEnd: true
                 })
             }
-            for (let i = movieResp.limits.start; i < movieResp.limits.end; i++) {
-                this.movieBuffer[i] = movieResp.movies[i - movieResp.limits.start];
+            for (let i = tvResp.limits.start; i < tvResp.limits.end; i++) {
+                this.tvBuffer[i] = tvResp.tvshows[i - tvResp.limits.start];
             }
-            if ((this.movieBuffer.length - this.lastBufferLength) == Object.keys(this.movieBuffer).length) {
-                this.lastBufferLength = this.movieBuffer.length;
-                let newMovies = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.movieGroups), this.movieBuffer);
-                this.movieBuffer = [];
+            if ((this.tvBuffer.length - this.lastBufferLength) == Object.keys(this.tvBuffer).length) {
+                this.lastBufferLength = this.tvBuffer.length;
+                let newTvs = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.tvGroups), this.tvBuffer);
+                this.tvBuffer = [];
                 this.setState({
-                    movieGroups: newMovies,
+                    tvGroups: newTvs,
                 })
             }
 
@@ -189,7 +189,7 @@ export default class Movies extends React.Component<Props, State> {
             return;
         }
         this.curPage++;
-        this.loadMovies();
+        this.loadTV();
     }
 
     reset() {
@@ -211,13 +211,13 @@ export default class Movies extends React.Component<Props, State> {
         if (Object.values(SortMethod).includes(param.key as SortMethod)) {
             this.setState({
                 isScollEnd: false,
-                movieGroups: [],
+                tvGroups: [],
                 sortMethod: param.key as SortMethod
             }, this.nextPage.bind(this));
         } else if (Object.values(SortOrder).includes(param.key as SortOrder)) {
             this.setState({
                 isScollEnd: false,
-                movieGroups: [],
+                tvGroups: [],
                 sortOrder: param.key as SortOrder
             }, this.nextPage.bind(this));
         }
@@ -229,14 +229,14 @@ export default class Movies extends React.Component<Props, State> {
         this.shouldGrouping = checked;
         this.setState({
             isScollEnd: false,
-            movieGroups: [],
+            tvGroups: [],
         }, this.nextPage.bind(this))
     }
 
-    findMovieById(movieid: number) {
-        for (let g of this.state.movieGroups) {
+    findTvById(tvshowid: number) {
+        for (let g of this.state.tvGroups) {
             for (let m of g.media) {
-                if (m.movieid == movieid) {
+                if (m.tvshowid == tvshowid) {
                     return m;
                 }
             }
@@ -244,17 +244,17 @@ export default class Movies extends React.Component<Props, State> {
         return null;
     }
 
-    onPlayClick(movieid: number) {
-        let movie = this.findMovieById(movieid);
-        if (movie == null) {
-            message.warn('未找到电影id：' + movieid);
+    onPlayClick(tvid: number) {
+        let tv = this.findTvById(tvid);
+        if (tv == null) {
+            message.warn('未找到剧集id：' + tvid);
             return
         }
-        player.openPlayer(movie.file);
+        player.openPlayer(tv.file);
     }
 
-    onMediaClick(movieid: number) {
-        this.props.history.push(`/movie/${movieid}`)
+    onMediaClick(tvid: number) {
+        this.props.history.push(`/tv/${tvid}`)
     }
 
     onSizerChange(n: number) {
@@ -264,7 +264,7 @@ export default class Movies extends React.Component<Props, State> {
     }
 
     render() {
-        let { loading, isScollEnd, movieGroups, sortMethod, sortOrder, posterSize } = this.state;
+        let { loading, isScollEnd, tvGroups: tvGroups, sortMethod, sortOrder, posterSize } = this.state;
 
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
             <Menu.Item disabled={true} className="switch-item">
@@ -277,9 +277,9 @@ export default class Movies extends React.Component<Props, State> {
                 <Menu.Item key={SortMethod.dateadded}>
                     按添加顺序
                 </Menu.Item>
-                <Menu.Item key={SortMethod.sorttitle}>
+                {/* <Menu.Item key={SortMethod.sorttitle}>
                     按名称
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item key={SortMethod.lastplayed}>
                     按最后观看时间
                 </Menu.Item>
@@ -340,20 +340,20 @@ export default class Movies extends React.Component<Props, State> {
                     loader={null}
                     useWindow={false}
                 >
-                    {movieGroups.map((groupItem) => (
+                    {tvGroups.map((groupItem) => (
                         <div className="movie-list" key={groupItem.group ? groupItem.group.name : "default-group"}>
                             {groupItem.group ?
                                 <div className="group-title">
                                     <span>{groupItem.group.name}</span>
                                 </div> : null}
 
-                            {groupItem.media.map((movie) => (
+                            {groupItem.media.map((tv) => (
                                 <Poster
-                                    key={movie.movieid}
-                                    identifier={movie.movieid}
-                                    title={movie.title}
-                                    plot={movie.plot}
-                                    url={movie.art.poster}
+                                    key={tv.tvshowid}
+                                    identifier={tv.tvshowid}
+                                    title={tv.title}
+                                    plot={tv.plot}
+                                    url={tv.art.poster}
                                     {...SIZE_MAP[posterSize]}
                                     onClick={this.onMediaClick.bind(this)}
                                     onPlayClick={this.onPlayClick.bind(this)}

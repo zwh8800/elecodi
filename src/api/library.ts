@@ -8,8 +8,8 @@ import {
 } from './model';
 
 export enum SortOrder {
-    Ascending = 'ascending',
-    Descending = 'descending'
+    Asc = 'ascending',
+    Desc = 'descending'
 }
 
 export enum SortMethod {
