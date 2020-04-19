@@ -9,6 +9,7 @@ import {
     Movie,
     getMovieDetail
 } from '@/api';
+import * as player from '@/player/player';
 
 interface Props extends RouteComponentProps { }
 interface RouteParam {
@@ -26,12 +27,8 @@ function Detail(props: Props) {
         setMovie(movie.moviedetails);
     }
 
-    function onMediaClick() {
-
-    }
-
-    function onPlayClick() {
-
+    function onPlayClick(movieid: number) {
+        player.openPlayer(movie.file);
     }
 
     function transKodiImage(url: string) {
@@ -53,7 +50,7 @@ function Detail(props: Props) {
                     width={200}
                     height={300}
                     url={movie.art.poster}
-                    onClick={onMediaClick}
+                    onClick={onPlayClick}
                     onPlayClick={onPlayClick} />
                 <Summary movie={movie} />
             </div>
