@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { RouteItem } from '@/routes';
 import { message, Dropdown, Menu, Switch } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
@@ -33,7 +33,9 @@ class GroupMedia<M> {
 
 type GroupMovie = GroupMedia<Movie>
 
-interface Props { }
+interface Props {
+    routes: RouteItem[]
+}
 
 class State {
     loading: boolean = false;

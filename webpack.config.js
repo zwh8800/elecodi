@@ -11,7 +11,7 @@ module.exports = (env) => {
     console.log('env=' + env);
     return {
         mode: env,
-        entry: './src/app.tsx',
+        entry: './src/index.tsx',
         // target: 'electron-renderer',
         output: {
             path: path.join(__dirname, 'public', 'dist'),
