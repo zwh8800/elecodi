@@ -11,6 +11,7 @@
         padding: 0 25px;
         @include box-between;
         background: $--color-tranparent;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .15);
     }
 
     .movie-list {
