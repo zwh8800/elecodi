@@ -3,7 +3,8 @@ import {
     GetMovieLibraryResp,
     GetTvShowLibraryResp,
     GetSeasonsLibraryResp,
-    GetEpisodesLibraryResp
+    GetEpisodesLibraryResp,
+    Movie
 } from './model';
 
 export enum SortOrder {
@@ -96,7 +97,7 @@ export function getMovieLibrary(sort?: Sort, page?: number, pageSize?: number): 
     })
 }
 
-export function getMovieDetail(movieid: number): PromiseLike<GetMovieLibraryResp> {
+export function getMovieDetail(movieid: number): PromiseLike<Movie> {
     return kodiServer.request('VideoLibrary.GetMovieDetails', {
         movieid: movieid,
         properties: movieProperties,
