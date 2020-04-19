@@ -40,7 +40,9 @@ function Detail(props: Props) {
     }
 
 
-    return movie ? (<div className="detail-con" style={{ backgroundImage: `url('${transKodiImage(movie.art.fanart)}')` }}>
+    return movie ? (<div
+        className="detail-con"
+        style={{ backgroundImage: movie.art.fanart ? `url('${transKodiImage(movie.art.fanart)}')` : undefined }}>
         <div className="detail-scroll-con">
             <div className="row-first">
                 <Poster

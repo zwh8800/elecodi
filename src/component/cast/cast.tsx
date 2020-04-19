@@ -25,6 +25,9 @@ function Cast(props: Props) {
 
     const { cast } = props;
 
+    if (!cast || cast.length == 0) {
+        return null
+    }
     return (
         <div className="cast-con">
             <h3>演员表</h3>

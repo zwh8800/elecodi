@@ -36,7 +36,7 @@ function Summary(props: Props) {
                         <span className="duration">{durationForamt(runtime)}</span>
                         <span className="dot">·</span>
                         <span>{lastplayed ? '已播放' : '未播放'}</span>
-                        <span className="rate">{rating ? `${rating}/10` : '未评分'}</span>
+                        <span className="rate">{rating ? `${rating} / 10` : '未评分'}</span>
                     </div>
                     <p className="right">{(genre || []).join(',')}</p>
 
