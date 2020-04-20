@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Movie } from '@/api';
 import moment from 'moment';
 import Truncate from '@/component/truncate';
+import { iso6393Name } from '@/util/lang';
+
 import './summary.scss';
 
 interface Props {
@@ -144,9 +146,9 @@ function Summary(props: Props) {
                                             {audioFormat(audio.channels)}
                                         </span>
                                         {
-                                            audio.language ?
+                                            iso6393Name(audio.language) ?
                                                 <span className="tag-label">
-                                                    {audio.language}
+                                                    {iso6393Name(audio.language)}
                                                 </span>
                                                 : ""
                                         }
@@ -164,8 +166,8 @@ function Summary(props: Props) {
                             <span className="label">字幕</span>
                             <span className="value">
                                 {
-                                    streamdetails.subtitle.map((sub, i) => sub.language ? <span key={i} className="tag-label">
-                                        {sub.language}
+                                    streamdetails.subtitle.map((sub, i) => iso6393Name(sub.language) ? <span key={i} className="tag-label">
+                                        {iso6393Name(sub.language)}
                                     </span> : ""
                                     )
                                 }
