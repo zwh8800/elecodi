@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Movie } from '@/api';
 import moment from 'moment';
+import { iso6393Name } from '@/util/lang';
+
 import './summary.scss';
 
 interface Props {
@@ -141,7 +143,7 @@ function Summary(props: Props) {
                                         {
                                             audio.language ?
                                                 <span className="tag-label">
-                                                    {audio.language}
+                                                    {iso6393Name(audio.language)}
                                                 </span>
                                                 : ""
                                         }
@@ -160,7 +162,7 @@ function Summary(props: Props) {
                             <span className="value">
                                 {
                                     streamdetails.subtitle.map((sub, i) => sub.language ? <span key={i} className="tag-label">
-                                        {sub.language}
+                                        {iso6393Name(sub.language)}
                                     </span> : ""
                                     )
                                 }
