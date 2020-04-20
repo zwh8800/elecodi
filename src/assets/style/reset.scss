@@ -4,6 +4,10 @@ body {
     background-color: $--color-theme;
 }
 
+::selection {
+    background-color: $--color-active-lighter
+}
+
 p {
     margin-bottom: 0;
 }
