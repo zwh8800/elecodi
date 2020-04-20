@@ -1,13 +1,29 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { Movie } from '@/api';
 import moment from 'moment';
 import { iso6393Name } from '@/util/lang';
-
+import { CastItem } from '@/component/cast/cast';
+import { Streamdetails } from '@/api';
 import './summary.scss';
+import { FormProvider } from 'antd/lib/form/context';
 
+interface Meida {
+    cast: CastItem[];
+    title: string;
+    originaltitle: string;
+    year: number;
+    runtime?: number;
+    lastplayed: string;
+    rating: number;
+    genre: string[];
+    director?: string[];
+    country?: string[];
+    imdbnumber: string;
+    plot: string;
+    streamdetails?: Streamdetails;
+
+}
 interface Props {
-    movie: Movie
+    media: Meida
 }
 
 
@@ -69,7 +85,7 @@ function Summary(props: Props) {
         }
     }
 
-    const { title, originaltitle, year, runtime, lastplayed, rating, genre, director, country, imdbnumber, plot, streamdetails } = props.movie;
+    const { title, originaltitle, year, runtime, lastplayed, rating, genre, director, country, imdbnumber, plot, streamdetails } = props.media;
 
     return (
         <div className="summary">

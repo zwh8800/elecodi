@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as conf from '@/conf/elecodiConf';
 import './cast.scss';
 
-class CastItem {
+export class CastItem {
     name: string;
     order: number;
     role: string;

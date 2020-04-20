@@ -75,6 +75,12 @@
             background-position: center;
             position: relative;
 
+            h3 {
+                font-size: 15px;
+                color: $--color-primary;
+                margin-bottom: 10px;
+            }
+
             .detail-scroll-con {
                 padding: 60px;
                 height: calc(100vh - 60px);
@@ -100,6 +106,14 @@
 
             .row-first {
                 display: flex;
+            }
+
+            .seacons-con {
+                margin-top: 20px;
+
+                .seacons {
+                    display: flex;
+                }
             }
         }
     }

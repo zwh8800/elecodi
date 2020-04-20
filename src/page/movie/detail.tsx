@@ -50,7 +50,7 @@ function Detail(props: Props) {
                     url={movie.art.poster}
                     onClick={onPlayClick}
                     onPlayClick={onPlayClick} />
-                <Summary movie={movie} />
+                <Summary media={movie} />
             </div>
             <div className="row-second">
                 <Cast cast={movie.cast} />
