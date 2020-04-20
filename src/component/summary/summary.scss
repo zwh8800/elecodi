@@ -5,6 +5,14 @@
     padding-bottom: 20px;
     color: $--color-attractive;
 
+    .tag-label {
+        margin-right: 10px;
+        padding: 0 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        background-color: $--color-tranparent;
+    }
+
     .header {
         padding: 0 20px;
 
@@ -36,12 +44,8 @@
                 display: inline-block;
             }
 
-            .rate {
+            .tag-label {
                 margin-left: 25px;
-                padding: 0 8px;
-                border-radius: 4px;
-                white-space: nowrap;
-                background-color: $--color-tranparent;
             }
         }
     }
