@@ -131,7 +131,7 @@ function Summary(props: Props) {
                             <span className="label">音频</span>
                             <span className="value">
                                 {
-                                    streamdetails.audio.map((audio, i) => <React.Fragment>
+                                    streamdetails.audio.map((audio, i) => <React.Fragment key={i}>
                                         <span className="tag-label">
                                             {audio.codec}
                                         </span>
@@ -147,7 +147,7 @@ function Summary(props: Props) {
                                         }
                                         {
                                             i != streamdetails.audio.length - 1 ?
-                                                <span> | </span>
+                                                <span className="tag-label-splitter"> | </span>
                                                 : ""
                                         }
                                     </React.Fragment>
@@ -159,7 +159,7 @@ function Summary(props: Props) {
                             <span className="label">字幕</span>
                             <span className="value">
                                 {
-                                    streamdetails.subtitle.map(sub => sub.language ? <span className="tag-label">
+                                    streamdetails.subtitle.map(sub => sub.language ? <span key={sub.language} className="tag-label">
                                         {sub.language}
                                     </span> : ""
                                     )

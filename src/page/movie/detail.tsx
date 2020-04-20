@@ -23,7 +23,6 @@ function Detail(props: Props) {
     async function getDetail() {
         let movieid = (props.match.params as RouteParam).id;
         let movie = await getMovieDetail(Number.parseInt(movieid));
-        console.log(movie)
         setMovie(movie.moviedetails);
     }
 
