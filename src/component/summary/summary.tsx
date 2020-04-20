@@ -1,31 +1,12 @@
 import * as React from 'react';
 import moment from 'moment';
 import { iso6393Name } from '@/util/lang';
-import { CastItem } from '@/component/cast/cast';
-import { Streamdetails } from '@/api';
+import { Movie, Tvshow } from '@/api';
 import './summary.scss';
-import { FormProvider } from 'antd/lib/form/context';
 
-interface Meida {
-    cast: CastItem[];
-    title: string;
-    originaltitle: string;
-    year: number;
-    runtime?: number;
-    lastplayed: string;
-    rating: number;
-    genre: string[];
-    director?: string[];
-    country?: string[];
-    imdbnumber: string;
-    plot: string;
-    streamdetails?: Streamdetails;
-
-}
 interface Props {
-    media: Meida
+    media: Movie & Tvshow
 }
-
 
 function Summary(props: Props) {
 
@@ -85,7 +66,7 @@ function Summary(props: Props) {
         }
     }
 
-    const { title, originaltitle, year, runtime, lastplayed, rating, genre, director, country, imdbnumber, plot, streamdetails } = props.media;
+    const { title, originaltitle, year, runtime, lastplayed, rating, genre, director, country, imdbnumber, plot, streamdetails, studio } = props.media;
 
     return (
         <div className="summary">
@@ -102,7 +83,7 @@ function Summary(props: Props) {
                         <span className="duration">{durationForamt(runtime)}</span>
                         <span className="dot">·</span>
                         <span>{lastplayed ? '已播放' : '未播放'}</span>
-                        <span className="tag-label">{rating ? `${rating} / 10` : '未评分'}</span>
+                        <span className="tag-label">{rating ? `${rating.toFixed(1)} / 10` : '未评分'}</span>
                     </div>
                     <p className="right">{(genre || []).join(', ')}</p>
 
@@ -111,14 +92,24 @@ function Summary(props: Props) {
             <div className="divider" />
             <div className="content">
                 <section className="section">
-                    <div className="item">
-                        <span className="label">导演</span>
-                        <span className="value">{(director || []).join(', ')}</span>
-                    </div>
-                    <div className="item">
-                        <span className="label">国家</span>
-                        <span className="value">{(country || []).join(', ')}</span>
-                    </div>
+                    {
+                        director && <div className="item">
+                            <span className="label">导演</span>
+                            <span className="value">{(director || []).join(', ')}</span>
+                        </div>
+                    }
+                    {
+                        country && <div className="item">
+                            <span className="label">国家</span>
+                            <span className="value">{(country || []).join(', ')}</span>
+                        </div>
+                    }
+                    {
+                        studio && <div className="item">
+                            <span className="label">工作室</span>
+                            <span className="value">{(studio || []).join(', ')}</span>
+                        </div>
+                    }
                     <div className="item">
                         <span className="label">IMDB</span>
                         <span className="value">{imdbnumber}</span>
