@@ -89,6 +89,11 @@
         .section.introduction {
             word-break: break-all;
             word-wrap: break-word;
+
+            .truncate-ellipsis {
+                cursor: pointer;
+                color: $--color-dim;
+            }
         }
     }
 }
