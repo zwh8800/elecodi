@@ -45,7 +45,6 @@ function Detail(props: Props) {
                     key={movie.movieid}
                     identifier={movie.movieid}
                     title={movie.title}
-                    plot={movie.plot}
                     width={200}
                     height={300}
                     url={movie.art.poster}

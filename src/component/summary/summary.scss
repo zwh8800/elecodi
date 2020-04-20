@@ -11,6 +11,10 @@
         border-radius: 4px;
         white-space: nowrap;
         background-color: $--color-tranparent;
+        color: $--color-dim;
+        display: inline-block;
+        line-height: 18px;
+        font-weight: normal;
     }
 
     .tag-label-splitter {
@@ -77,6 +81,8 @@
 
             .item>.value {
                 font-weight: bold;
+                max-width: 600px;
+                display: inline-block;
             }
         }
 

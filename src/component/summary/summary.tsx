@@ -85,7 +85,7 @@ function Summary(props: Props) {
                         <span>{lastplayed ? '已播放' : '未播放'}</span>
                         <span className="tag-label">{rating ? `${rating} / 10` : '未评分'}</span>
                     </div>
-                    <p className="right">{(genre || []).join(',')}</p>
+                    <p className="right">{(genre || []).join(', ')}</p>
 
                 </div>
             </div>
@@ -94,11 +94,11 @@ function Summary(props: Props) {
                 <section className="section">
                     <div className="item">
                         <span className="label">导演</span>
-                        <span className="value">{(director || []).join(',')}</span>
+                        <span className="value">{(director || []).join(', ')}</span>
                     </div>
                     <div className="item">
                         <span className="label">国家</span>
-                        <span className="value">{(country || []).join(',')}</span>
+                        <span className="value">{(country || []).join(', ')}</span>
                     </div>
                     <div className="item">
                         <span className="label">IMDB</span>
@@ -159,7 +159,7 @@ function Summary(props: Props) {
                             <span className="label">字幕</span>
                             <span className="value">
                                 {
-                                    streamdetails.subtitle.map(sub => sub.language ? <span key={sub.language} className="tag-label">
+                                    streamdetails.subtitle.map((sub, i) => sub.language ? <span key={i} className="tag-label">
                                         {sub.language}
                                     </span> : ""
                                     )
