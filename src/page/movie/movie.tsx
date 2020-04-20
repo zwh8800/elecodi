@@ -30,7 +30,8 @@ const SIZE_MAP = [
 ];
 
 class GroupInfo {
-    name: string
+    name: string;
+    sortKey: any;
 }
 
 class GroupMedia<M> {
@@ -72,7 +73,8 @@ export default class Movies extends React.Component<Props, State> {
             case SortMethod.dateadded: {
                 let date = new Date(movie.dateadded);
                 return {
-                    name: moment(date).format('YYYY-MM')
+                    name: moment(date).format('YYYY-MM'),
+                    sortKey: date
                 }
             }
 
@@ -86,11 +88,13 @@ export default class Movies extends React.Component<Props, State> {
                 }
                 if (tokens[0].type != 2) {
                     return {
-                        name: '#'
+                        name: '#',
+                        sortKey: '#'
                     }
                 }
                 return {
-                    name: tokens[0].target.substr(0, 1).toUpperCase()
+                    name: tokens[0].target.substr(0, 1).toUpperCase(),
+                    sortKey: tokens[0].target.substr(0, 1).toUpperCase()
                 }
             }
 
@@ -98,11 +102,13 @@ export default class Movies extends React.Component<Props, State> {
                 let date = new Date(movie.lastplayed);
                 if (isNaN(date.getTime())) {
                     return {
-                        name: '未播放'
+                        name: '未播放',
+                        sortKey: new Date(0)
                     }
                 }
                 return {
-                    name: moment(date).format('YYYY-MM')
+                    name: moment(date).format('YYYY-MM'),
+                    sortKey: date
                 }
             }
 
@@ -111,7 +117,22 @@ export default class Movies extends React.Component<Props, State> {
         }
     }
 
-    grouping(by: SortMethod, groupMovie: GroupMovie[], movies: Movie[]): GroupMovie[] {
+    sortInsert(order: SortOrder, groupMovie: GroupMovie[], group: GroupMovie) {
+        for (let [i, g] of groupMovie.entries()) {
+            if (g.group.name == group.group.name) {
+                g.media.push(...group.media);
+                return g;
+            } else if (order == SortOrder.Asc && group.group.sortKey < g.group.sortKey ||
+                order == SortOrder.Desc && group.group.sortKey > g.group.sortKey) {
+                groupMovie.splice(i, 0, group);
+                return group;
+            }
+        }
+        groupMovie.push(group)
+        return group;
+    }
+
+    grouping(by: SortMethod, order: SortOrder, groupMovie: GroupMovie[], movies: Movie[]): GroupMovie[] {
         let lastGroup: GroupMovie;
         if (groupMovie.length == 0) {
             lastGroup = {
@@ -138,11 +159,10 @@ export default class Movies extends React.Component<Props, State> {
                 lastGroup.media.push(movie);
                 continue;
             }
-            lastGroup = {
+            lastGroup = this.sortInsert(order, groupMovie, {
                 group: group,
                 media: [movie]
-            }
-            groupMovie.push(lastGroup)
+            })
         }
 
         return groupMovie;
@@ -167,7 +187,11 @@ export default class Movies extends React.Component<Props, State> {
             }
             if ((this.movieBuffer.length - this.lastBufferLength) == Object.keys(this.movieBuffer).length) {
                 this.lastBufferLength = this.movieBuffer.length;
-                let newMovies = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.movieGroups), this.movieBuffer);
+                let newMovies = this.grouping(
+                    this.shouldGrouping ? this.state.sortMethod : null,
+                    this.state.sortOrder,
+                    Array.of(...this.state.movieGroups),
+                    this.movieBuffer);
                 this.movieBuffer = [];
                 this.setState({
                     movieGroups: newMovies,

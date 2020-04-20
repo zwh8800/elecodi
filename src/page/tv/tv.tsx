@@ -30,7 +30,8 @@ const SIZE_MAP = [
 ];
 
 class GroupInfo {
-    name: string
+    name: string;
+    sortKey: any;
 }
 
 class GroupMedia<M> {
@@ -46,8 +47,8 @@ class State {
     loading: boolean = false;
     isScollEnd: boolean = false;
     tvGroups: GroupTv[] = [];
-    sortMethod: SortMethod = SortMethod.dateadded;
-    sortOrder: SortOrder = SortOrder.Desc;
+    sortMethod: SortMethod = SortMethod.sorttitle;
+    sortOrder: SortOrder = SortOrder.Asc;
     posterSize: number = 1; // 0,1,2 = 小中大
 }
 
@@ -72,7 +73,8 @@ export default class TV extends React.Component<Props, State> {
             case SortMethod.dateadded: {
                 let date = new Date(tv.dateadded);
                 return {
-                    name: moment(date).format('YYYY-MM')
+                    name: moment(date).format('YYYY-MM'),
+                    sortKey: date
                 }
             }
 
@@ -86,11 +88,13 @@ export default class TV extends React.Component<Props, State> {
                 }
                 if (tokens[0].type != 2) {
                     return {
-                        name: '#'
+                        name: '#',
+                        sortKey: '#'
                     }
                 }
                 return {
-                    name: tokens[0].target.substr(0, 1).toUpperCase()
+                    name: tokens[0].target.substr(0, 1).toUpperCase(),
+                    sortKey: tokens[0].target.substr(0, 1).toUpperCase()
                 }
             }
 
@@ -98,11 +102,13 @@ export default class TV extends React.Component<Props, State> {
                 let date = new Date(tv.lastplayed);
                 if (isNaN(date.getTime())) {
                     return {
-                        name: '未播放'
+                        name: '未播放',
+                        sortKey: new Date(0)
                     }
                 }
                 return {
-                    name: moment(date).format('YYYY-MM')
+                    name: moment(date).format('YYYY-MM'),
+                    sortKey: date
                 }
             }
 
@@ -111,7 +117,22 @@ export default class TV extends React.Component<Props, State> {
         }
     }
 
-    grouping(by: SortMethod, groupTv: GroupTv[], tvs: Tvshow[]): GroupTv[] {
+    sortInsert(order: SortOrder, groupTv: GroupTv[], group: GroupTv) {
+        for (let [i, g] of groupTv.entries()) {
+            if (g.group.name == group.group.name) {
+                g.media.push(...group.media);
+                return g;
+            } else if (order == SortOrder.Asc && group.group.sortKey < g.group.sortKey ||
+                order == SortOrder.Desc && group.group.sortKey > g.group.sortKey) {
+                groupTv.splice(i, 0, group);
+                return group;
+            }
+        }
+        groupTv.push(group)
+        return group;
+    }
+
+    grouping(by: SortMethod, order: SortOrder, groupTv: GroupTv[], tvs: Tvshow[]): GroupTv[] {
         let lastGroup: GroupTv;
         if (groupTv.length == 0) {
             lastGroup = {
@@ -138,11 +159,10 @@ export default class TV extends React.Component<Props, State> {
                 lastGroup.media.push(tv);
                 continue;
             }
-            lastGroup = {
+            lastGroup = this.sortInsert(order, groupTv, {
                 group: group,
                 media: [tv]
-            }
-            groupTv.push(lastGroup)
+            })
         }
 
         return groupTv;
@@ -167,7 +187,11 @@ export default class TV extends React.Component<Props, State> {
             }
             if ((this.tvBuffer.length - this.lastBufferLength) == Object.keys(this.tvBuffer).length) {
                 this.lastBufferLength = this.tvBuffer.length;
-                let newTvs = this.grouping(this.shouldGrouping ? this.state.sortMethod : null, Array.of(...this.state.tvGroups), this.tvBuffer);
+                let newTvs = this.grouping(
+                    this.shouldGrouping ? this.state.sortMethod : null,
+                    this.state.sortOrder,
+                    Array.of(...this.state.tvGroups),
+                    this.tvBuffer);
                 this.tvBuffer = [];
                 this.setState({
                     tvGroups: newTvs,
@@ -277,9 +301,9 @@ export default class TV extends React.Component<Props, State> {
                 <Menu.Item key={SortMethod.dateadded}>
                     按添加顺序
                 </Menu.Item>
-                {/* <Menu.Item key={SortMethod.sorttitle}>
+                <Menu.Item key={SortMethod.sorttitle}>
                     按名称
-                </Menu.Item> */}
+                </Menu.Item>
                 <Menu.Item key={SortMethod.lastplayed}>
                     按最后观看时间
                 </Menu.Item>
