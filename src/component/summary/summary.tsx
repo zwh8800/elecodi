@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Movie } from '@/api';
 import moment from 'moment';
-import Truncate from '@/component/truncate';
 import { iso6393Name } from '@/util/lang';
 
 import './summary.scss';
@@ -72,9 +71,6 @@ function Summary(props: Props) {
 
     const { title, originaltitle, year, runtime, lastplayed, rating, genre, director, country, imdbnumber, plot, streamdetails } = props.movie;
 
-
-    const [plotExpanded, setPlotExpanded] = useState(false);
-    const [plotTruncated, setPlotTruncated] = useState(false);
     return (
         <div className="summary">
             <div className="header">
@@ -176,22 +172,7 @@ function Summary(props: Props) {
                     </section>
                 ) : ""}
                 <section className="section introduction">
-                    <Truncate
-                        lines={!plotExpanded && 2}
-                        ellipsis={(
-                            <span>... <span className="truncate-ellipsis" onClick={() => setPlotExpanded(true)}>展开</span></span>
-                        )}
-                        onTruncate={(truncated) => {
-                            if (truncated !== plotTruncated) {
-                                setPlotTruncated(truncated)
-                            }
-                        }}
-                    >
-                        {plot}
-                    </Truncate>
-                    {!plotTruncated && plotExpanded && (
-                        <span className="truncate-ellipsis" onClick={() => setPlotExpanded(false)}>收起</span>
-                    )}
+                    <div>{plot}</div>
                 </section>
             </div>
         </div>
