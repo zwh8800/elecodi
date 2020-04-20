@@ -159,9 +159,9 @@ function Summary(props: Props) {
                             <span className="label">字幕</span>
                             <span className="value">
                                 {
-                                    streamdetails.subtitle.map(sub => <span className="tag-label">
+                                    streamdetails.subtitle.map(sub => sub.language ? <span className="tag-label">
                                         {sub.language}
-                                    </span>
+                                    </span> : ""
                                     )
                                 }
                             </span>
