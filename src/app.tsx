@@ -56,8 +56,7 @@ function App() {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    selectedKeys={[selectedMenu]}
-                    inlineCollapsed={menuCollapsed}>
+                    selectedKeys={[selectedMenu]}>
                     {
                         menus.map(v => (
                             <Menu.Item key={v.key}>
