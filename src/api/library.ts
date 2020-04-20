@@ -4,7 +4,8 @@ import {
     GetTvShowLibraryResp,
     GetSeasonsLibraryResp,
     GetEpisodesLibraryResp,
-    GetMovieDetailsResp
+    GetMovieDetailsResp,
+    GetTvShowDetailResp
 } from './model';
 
 export enum SortOrder {
@@ -38,6 +39,8 @@ const movieProperties = ["title", "genre", "year", "rating", "director", "traile
     "studio", "mpaa", "cast", "country", "imdbnumber", "runtime", "set", "streamdetails",
     "top250", "votes", "fanart", "thumbnail", "file", "sorttitle", "resume", "setid", "dateadded",
     "art", "userrating"];
+
+const tvShowListProperties = ["title", "plot", "lastplayed", "file", "dateadded", "art"];
 
 const tvShowProperties = ["title", "genre", "year", "rating", "plot", "studio",
     "mpaa", "cast", "playcount", "episode", "imdbnumber", "premiered", "votes",
@@ -108,12 +111,19 @@ export function getTvShowLibrary(sort?: Sort, page?: number, pageSize?: number):
     let [start, end] = pager(page, pageSize);
 
     return kodiServer.request('VideoLibrary.GetTvShows', {
-        properties: tvShowProperties,
+        properties: tvShowListProperties,
         sort: sort,
         limits: {
             start: start,
             end: end
         },
+    })
+}
+
+export function getTvShowDetail(tvShowId: number): PromiseLike<GetTvShowDetailResp> {
+    return kodiServer.request('VideoLibrary.GetTVShowDetails', {
+        tvshowid: tvShowId,
+        properties: tvShowProperties,
     })
 }
 

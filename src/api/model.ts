@@ -94,6 +94,10 @@ export class GetTvShowLibraryResp {
     tvshows: Tvshow[];
 }
 
+export class GetTvShowDetailResp {
+    tvshowdetails: Tvshow;
+}
+
 export class Tvshow {
     art: Art;
     cast: Cast[];
