@@ -2,6 +2,7 @@ import * as React from 'react';
 import moment from 'moment';
 import { iso6393Name } from '@/util/lang';
 import { Movie, Tvshow } from '@/api';
+import Truncate from '@/component/truncate/truncate';
 import './summary.scss';
 
 interface Props {
@@ -179,7 +180,7 @@ function Summary(props: Props) {
                     </section>
                 ) : ""}
                 <section className="section introduction">
-                    <div>{plot}</div>
+                    <Truncate lines={3} lineHeight={24}>{plot}</Truncate>
                 </section>
             </div>
         </div>
