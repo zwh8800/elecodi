@@ -77,7 +77,7 @@ function Detail(props: Props) {
                                     identifier={season.seasonid}
                                     title={season.showtitle}
                                     width={150}
-                                    height={200}
+                                    height={225}
                                     url={season.art.poster}
                                     onClick={onSeaconClick}
                                     onPlayClick={onSeaconPlayClick}

@@ -67,7 +67,7 @@ function Truncate(props: Props) {
     return (
         <div className="truncate-con">
             <div style={style}>
-                <span ref={textRef} >{props.children}</span>
+                <span onClick={() => truncate(true)} ref={textRef} style={{ 'cursor': !expanded ? 'pointer' : 'initial' }} >{props.children}</span>
             </div>
             {
                 truncated && expanded && (
