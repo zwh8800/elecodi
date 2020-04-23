@@ -180,7 +180,7 @@ function Summary(props: Props) {
                     </section>
                 ) : ""}
                 <section className="section introduction">
-                    <Truncate lines={3} lineHeight={24}>{plot}</Truncate>
+                    <Truncate lines={3} lineHeight={24} ellipsis="...">{plot}</Truncate>
                 </section>
             </div>
         </div>

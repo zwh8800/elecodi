@@ -1,49 +1,85 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { debounce } from 'lodash';
+import './truncate.scss';
 
-class Props {
+interface Props {
     children: React.ReactNode;
-    ellipsis?: string = '...';
+    ellipsis?: string;
     lines: number;
     lineHeight: number;
-    // onTruncate?: (truncate: boolean) => void
 }
 
-
+class Style {
+    height: string = 'initial';
+    overflow?: string
+}
 function Truncate(props: Props) {
-    const [height, setHeight] = useState('initial');
-    let textRef: React.RefObject<HTMLDivElement> = React.createRef();
+    let collapseHeight = Math.floor(props.lineHeight * props.lines);
+    const [style, setStyle] = useState(new Style());
+    const [truncated, setTruncated] = useState(false);
+    const [expanded, setExpanded] = useState(false);
+
+    let textRef: React.RefObject<HTMLSpanElement> = React.createRef();
 
     function calTargetHeight() {
-        const { lines, lineHeight } = props;
-        if (!textRef.current) {
+        if (expanded) {
             return;
         }
+
         let currentHeight = Math.floor(textRef.current.getBoundingClientRect().height);
-        const collapseHeight = Math.floor(lineHeight * lines);
         if (currentHeight > collapseHeight) {
-            setHeight(Math.floor(lineHeight * lines) + 'px');
+            if (style.height !== collapseHeight + 'px') {
+                setStyle({
+                    height: collapseHeight + 'px',
+                    overflow: 'hidden'
+                })
+            }
+            setTruncated(true);
+            setExpanded(false);
+        } else {
+            setTruncated(false);
+        }
+    }
+
+    function truncate(expandState: boolean) {
+        setExpanded(expandState);
+        if (expandState) {
+            setStyle({
+                height: 'initial'
+            })
+        } else {
+            setStyle({
+                height: collapseHeight + 'px',
+                overflow: 'hidden'
+            })
         }
     }
 
     useEffect(() => {
         calTargetHeight();
 
-        let resizeListener = debounce(calTargetHeight, 100)
+        let resizeListener = () => window.requestAnimationFrame(() => calTargetHeight());
         window.addEventListener('resize', resizeListener);
         return () => {
             window.removeEventListener('resize', resizeListener)
         }
-    }, [])
-
+    }, [textRef])
     return (
-        <React.Fragment>
-            <div ref={textRef} style={{ height: height, overflow: 'hidden' }}>
-                {props.children}
+        <div className="truncate-con">
+            <div style={style}>
+                <span ref={textRef} >{props.children}</span>
             </div>
-            <span>{props.ellipsis}</span>
-        </React.Fragment>
+            {
+                truncated && expanded && (
+                    <span onClick={() => truncate(false)} className="ellipsis" style={{ lineHeight: props.lineHeight + 'px' }}>收起</span>
+                )
+            }
+            {
+                truncated && !expanded && (
+                    <span onClick={() => truncate(true)} className="ellipsis">{props.ellipsis}</span>
+                )
+            }
+        </div>
     )
 }
 
