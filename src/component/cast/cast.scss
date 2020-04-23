@@ -1,4 +1,24 @@
 .cast-con {
+    .switch {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+        font-weight: bold;
+        >span {
+            cursor: pointer;
+            margin: 0 5px;
+            color: $--color-primary;
+            transition: color 0.2s;
+            &:hover {
+                color: $--color-active;
+            }
+        }
+        span.disabled {
+            &:hover {
+                color: $--color-primary;
+            }
+        }
+    }
     .list {
         user-select: text;
         display: flex;
