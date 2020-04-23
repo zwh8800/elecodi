@@ -78,7 +78,7 @@ function Detail(props: Props) {
                                     title={season.showtitle}
                                     width={150}
                                     height={225}
-                                    url={season.art.poster}
+                                    url={season.art.poster || tvshow.art.poster}
                                     onClick={onSeaconClick}
                                     onPlayClick={onSeaconPlayClick}
                                 ></Poster>

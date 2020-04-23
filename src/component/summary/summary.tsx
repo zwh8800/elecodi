@@ -6,7 +6,7 @@ import Truncate from '@/component/truncate/truncate';
 import './summary.scss';
 
 interface Props {
-    media: Movie & Tvshow
+    media: Partial<Movie & Tvshow>
 }
 
 function Summary(props: Props) {
