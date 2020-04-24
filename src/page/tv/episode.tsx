@@ -7,19 +7,20 @@ import Cast from '@/component/cast/cast';
 import Summary from '@/component/summary/summary';
 import {
     Tvshow,
-    Season,
+    Episode,
     getTvShowDetail,
-    getSeasonsLibrary
+    getEpisodesLibrary
 } from '@/api';
 import * as player from '@/player/player';
 
 interface Props extends RouteComponentProps { }
 interface RouteParam {
     id: string
+    season: string
 }
-function Detail(props: Props) {
+function Episodes(props: Props) {
     const [tvshow, setTvshow] = useState(null as Tvshow);
-    const [seasons, setSeacons] = useState(null as Season[]);
+    const [episodes, setEpisodes] = useState([] as Episode[]);
 
     useEffect(() => {
         getDetail()
@@ -27,10 +28,11 @@ function Detail(props: Props) {
 
     async function getDetail() {
         let id = (props.match.params as RouteParam).id;
+        let season = (props.match.params as RouteParam).season;
         let tvData = await getTvShowDetail(Number.parseInt(id));
-        let seasonData = await getSeasonsLibrary(Number.parseInt(id));
+        let episodeData = await getEpisodesLibrary(Number.parseInt(id), Number.parseInt(season));
         setTvshow(tvData.tvshowdetails);
-        setSeacons(seasonData.seasons);
+        setEpisodes(episodeData.episodes);
     }
 
     function onPlayClick() {
@@ -42,12 +44,12 @@ function Detail(props: Props) {
         return conf.getConfig().kodiHttpUrl + '/image/' + url;
     }
 
-    function onSeaconClick() {
-
+    function onEpisodeClick(episode: Episode) {
+        player.openPlayer(episode.file);
     }
 
-    function onSeaconPlayClick() {
-
+    function onEpisodePlayClick(episode: Episode) {
+        player.openPlayer(episode.file);
     }
 
     return tvshow ? (
@@ -67,23 +69,26 @@ function Detail(props: Props) {
                         onPlayClick={onPlayClick} />
                     <Summary media={tvshow} />
                 </div>
-                {seasons && seasons.length > 0 && (<div className="seacons-con">
-                    <h3>分季</h3>
+                {episodes && episodes.length > 0 && (<div className="seacons-con">
+                    <h3>分集</h3>
                     <div className="seacons">
                         {
-                            seasons.map(season => {
+                            episodes.map(episode => {
                                 return <Poster
-                                    key={season.seasonid}
-                                    identifier={season.seasonid}
-                                    title={season.showtitle}
-                                    width={150}
-                                    height={225}
-                                    url={season.art.poster || tvshow.art.poster}
-                                    onClick={onSeaconClick}
-                                    onPlayClick={onSeaconPlayClick}
+                                    key={episode.episodeid}
+                                    identifier={episode}
+                                    title={episode.title}
+                                    width={200}
+                                    height={112}
+                                    plot={episode.plot}
+                                    url={episode.art.thumb || tvshow.art.poster}
+                                    onClick={onEpisodeClick}
+                                    onPlayClick={onEpisodePlayClick}
                                 ></Poster>
                             })
                         }
+                        {[...Array(20).keys()].map((i) => <i style={{ width: 200 }} key={i}></i>)}
+
                     </div>
                 </div>)}
                 <div className="row-second">
@@ -95,4 +100,4 @@ function Detail(props: Props) {
 
 }
 
-export default Detail;
+export default Episodes;

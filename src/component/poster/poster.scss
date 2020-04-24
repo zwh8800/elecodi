@@ -63,4 +63,8 @@
         text-decoration: underline;
         color: $--color-attractive;
     }
+
+    &~i {
+        margin: 0 5px;
+    }
 }

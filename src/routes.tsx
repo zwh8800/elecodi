@@ -1,7 +1,8 @@
 import Home from '@/page/home';
 import TV from '@/page/tv/tv';
 import Movie from '@/page/movie/movie';
-import TvDetail from '@/page/tv/detail';
+import Seasons from '@/page/tv/season';
+import Episodes from '@/page/tv/episode';
 import MovieDetail from '@/page/movie/detail';
 
 type ReactElement = any;
@@ -28,7 +29,13 @@ const routes: RouteItem[] = [
     },
     {
         path: '/tv/:id',
-        component: TvDetail,
+        component: Seasons,
+        exact: true,
+        breadcrumbName: '剧集/详情'
+    },
+    {
+        path: '/tv/:id/season/:season',
+        component: Episodes,
         breadcrumbName: '剧集/详情'
     },
     {

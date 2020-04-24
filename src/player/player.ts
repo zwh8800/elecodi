@@ -11,7 +11,7 @@ export function openPlayer(filepath: string) {
 
     filepath = filepath.replace(config.fileReplaceFrom, config.fileReplaceTo);
     if (config.windowsFs) {
-        filepath = filepath.replace('/', '\\');
+        filepath = filepath.replace(/\//g, '\\');
     }
     if (bridge) {
         try {
