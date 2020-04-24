@@ -8,11 +8,10 @@ export function openPlayer(filepath: string) {
         filepath = encodeURIComponent(filepath);
         filepath = filepath.replace("MYREPLAYCEFROM1234567890", config.fileReplaceFrom)
     }
-
-    filepath = filepath.replace(config.fileReplaceFrom, config.fileReplaceTo);
     if (config.windowsFs) {
         filepath = filepath.replace(/\//g, '\\');
     }
+    filepath = filepath.replace(config.fileReplaceFrom, config.fileReplaceTo);
     if (bridge) {
         try {
             bridge.shellOpenItem(filepath);
