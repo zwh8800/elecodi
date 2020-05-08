@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link, Route } from 'react-router-dom';
 import { message, Dropdown, Menu, Switch, Slider, Row, Col } from 'antd';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
@@ -20,6 +20,7 @@ import {
 import * as player from '@/player/player';
 
 import '@/assets/style/media-list';
+import { RouteItem } from '@/routes';
 
 const PAGE_SIZE = 20;
 
@@ -41,7 +42,9 @@ class GroupMedia<M> {
 
 type GroupTv = GroupMedia<Tvshow>
 
-interface Props extends RouteComponentProps { }
+interface Props extends RouteComponentProps {
+    routes: RouteItem[]
+}
 
 class State {
     loading: boolean = false;
@@ -289,7 +292,6 @@ export default class TV extends React.Component<Props, State> {
 
     render() {
         let { loading, isScollEnd, tvGroups: tvGroups, sortMethod, sortOrder, posterSize } = this.state;
-
         const sorterMenu = (<Menu multiple={true} selectedKeys={[sortMethod, sortOrder]} onClick={this.onSorterMenuSelected.bind(this)}>
             <Menu.Item disabled={true} className="switch-item">
                 <div>

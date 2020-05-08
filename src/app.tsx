@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import * as conf from '@/conf/elecodiConf';
 import Config from '@/component/config/config';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, RouteChildrenProps } from 'react-router-dom';
 import { Layout, Menu, Input } from 'antd';
-import routes from './routes';
 import "@/assets/style/index.scss";
+import { RouteItem } from './routes';
 
 const { Header, Sider, Content } = Layout;
 
@@ -16,7 +16,7 @@ class MenuItem {
     link: string;
 }
 
-function App() {
+function App(props: {routes: RouteItem[]}) {
     const menus: MenuItem[] = [{
         name: '电影',
         key: 'movie',
@@ -72,7 +72,7 @@ function App() {
             <Content>
                 <div className="content-con">
                     {
-                        routes.map((route, i) => {
+                        props.routes.map((route, i) => {
                             const { path, exact } = route;
                             return (
                                 <Route
@@ -80,7 +80,7 @@ function App() {
                                     path={path}
                                     exact={exact}
                                     render={(routeProps) => (
-                                        <route.component {...routeProps} />
+                                        <route.component {...routeProps} routes={route.children}/>
                                     )}
                                 />
                             )
